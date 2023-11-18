@@ -5,28 +5,93 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ post.title }} - Post Detail</title>
+    <title>{{ post.title }} - Detalle del Post</title>
+    <link rel="icon" href="https://storage.cloud.google.com/limonmental/Disen%CC%83o%20sin%20ti%CC%81tulo%20(5).png?authuser=3" type="image/png" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </head>
 <body>
-    <h2>{{ post.title }}</h2>
-    <p>{{ post.content }}</p>
-    <p>Author: {{ post.author.username }}</p>
-    <p>Created at: {{ post.created_at }}</p>
+    <nav class="navbar navbar-expand-lg navbar-light bg-ligh">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Limón mental 🍋</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../../">Inicio</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'psychologists' %}">Psicólogos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'posts' %}">Posts</a>
+                    </li>
+                    <li class="nav-item">
+                        {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'create_post' %}">Crear post</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="{% url 'logout' %}">Cerrar sesión</a>
+                        </li>
+                        {% else %}
+                            <li>
+                                <a class="nav-link" href="{% url 'login' %}">Iniciar sesión</a>
+                            </li>
+                            <li>
+                                <a class="nav-link" href="{% url 'register' %}">Registrarse</a>
+                            </li>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title">{{ post.title }}</h2>
+            <p class="card-text">{{ post.content }}</p>
+            <p class="card-text"><small class="text-muted">Creado el {{ post.created_at }}</small></p>
 
-    <h3>Comments</h3>
-    {% for comment in post.comments.all %}
-        <p>{{ comment.text }} - {{ comment.author.username }} - {{ comment.created_at }}</p>
-    {% endfor %}
+            <h3 class="mt-4">Comentarios</h3>
+            {% for comment in post.comments.all %}
+                <div class="mb-3">
+                    <p>{{ comment.text }} - {{ comment.author.username }} - {{ comment.created_at }}</p>
+                    {% if user.is_authenticated %}
+                        {% if user.is_staff or user == comment.author %}
+                            <form method="post" action="{% url 'delete_comment' comment_id=comment.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger">Eliminar Comentario</button>
+                            </form>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            {% endfor %}
 
-    {% if user.is_authenticated %}
-        <h3>Add Comment</h3>
-        <form method="post" action="{% url 'post_detail' post_id=post.id %}">
-            {% csrf_token %}
-            {{ comment_form.as_p }}
-            <button type="submit">Add Comment</button>
-        </form>
-    {% else %}
-        <p>Login to add a comment.</p>
-    {% endif %}
+            {% if user.is_authenticated %}
+                <h3 class="mt-4">Añadir Comentario</h3>
+                <form method="post" action="{% url 'post_detail' post_id=post.id %}">
+                    {% csrf_token %}
+                    {{ comment_form.as_p }}
+                    <button type="submit" class="btn btn-primary">Añadir Comentario</button>
+                </form>
+                {% if user.is_staff or user == post.author %}
+                    <h3 class="mt-4">Eliminar Post</h3>
+                    <form method="post" action="{% url 'delete_post' post_id=post.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Eliminar Post</button>
+                    </form>
+                {% endif %}
+            {% else %}
+                <p class="mt-4">Inicia sesión para añadir un comentario.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

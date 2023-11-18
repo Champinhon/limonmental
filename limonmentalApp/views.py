@@ -6,10 +6,38 @@ from .forms import PostForm, CommentForm
 from django.contrib.auth.decorators import login_required
 from .models import Post, Comment
 from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.decorators import user_passes_test
+from django.http import HttpResponse
+
+def psychologists(request):
+    psychologists_list = [
+        {"name": "Psicólogo 1", "photo": "https://storage.googleapis.com/limonmental/Disen%CC%83o%20sin%20ti%CC%81tulo%20(5).png", "description": "Descripción del psicólogo 1"},
+        {"name": "Psicólogo 2", "photo": "https://storage.googleapis.com/limonmental/53875233-04FA-4805-B538-43655913EC1C.jpg", "description": "Descripción del psicólogo 2"},
+    ]
+
+    return render(request, 'psychologists.html', {'psychologists_list': psychologists_list})
+
+def is_admin(user):
+    return user.is_staff
+
+def delete_comment(request, comment_id):
+    comment = get_object_or_404(Comment, id=comment_id)
+    if request.user.is_staff or request.user == comment.author:
+        comment.delete()
+    return redirect('posts')
+def delete_post(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+
+    if request.user.is_staff or request.user == post.author:
+        post.delete()
+        return redirect('posts') 
+
+    return HttpResponse("No tienes permisos para borrar este post.")
 
 def post_list(request):
-    posts = Post.objects.all()
-    return render(request, 'posts/post_list.html', {'posts': posts})
+    latest_posts = Post.objects.all().order_by('-created_at')
+
+    return render(request, 'posts/post_list.html', {'latest_posts': latest_posts})
 
 @login_required
 def create_post(request):
@@ -19,7 +47,7 @@ def create_post(request):
             post = form.save(commit=False)
             post.author = request.user
             post.save()
-            return redirect('post_list')
+            return redirect('posts')
     else:
         form = PostForm()
 
@@ -64,18 +92,22 @@ def user_login(request):
         form = CustomAuthenticationForm()
 
     return render(request, 'registration/login.html', {'form': form})
+@login_required
 def logout_view(request):
     logout(request)
     return redirect('home')
 
 
 def home(request):
-    latest_posts = Post.objects.order_by('-created_at')[:5]
+    query = request.GET.get('q')
+    posts = Post.objects.all()
 
-    context = {
-        'latest_posts': latest_posts,
-    }
+    if query:
+        posts = posts.filter(title__icontains=query)
+    else:
+        posts = posts.order_by('-created_at')[:3]
 
+    context = {'latest_posts': posts, 'query': query}
     return render(request, 'home.html', context)
 
 def post_detail(request, post_id):

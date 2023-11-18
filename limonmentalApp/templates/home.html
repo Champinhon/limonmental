@@ -5,34 +5,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Limón mental 🍋</title>
     <link rel="icon" href="https://storage.cloud.google.com/limonmental/Disen%CC%83o%20sin%20ti%CC%81tulo%20(5).png?authuser=3" type="image/png" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </head>
 <body>
-    {% if user.is_authenticated %}
-        <p>Te damos la bienvenida, {{ user.username }}! <a href="{% url 'logout' %}">Cerrar sesión</a></p>
-        <p><a href="{% url 'create_post' %}">Crear post</a></p>
-    {% else %}
-        <p><a href="{% url 'login' %}">Iniciar sesión</a></p>
-        <p><a href="{% url 'register' %}">Registrarse</a></p>
-    {% endif %}
-    <h2>Últimos Posts</h2>
-
-    {% if latest_posts %}
-        <ul>
-            {% for post in latest_posts %}
-                <li>
-                    <h3><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></h3>
-                    <p>{{ post.content }}</p>
-                    <p>Autor: {{ post.author.username }}</p>
-                    <p>Creado a las: {{ post.created_at }}</p>
-                    <h4>Comentarios</h4>
-                    {% for comment in post.comments.all %}
-                        <p>{{ comment.text }} - {{ comment.author.username }} - {{ comment.created_at }}</p>
-                    {% endfor %}
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No hay posts.</p>
-    {% endif %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-ligh">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Limón mental 🍋</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../../">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'psychologists' %}">Psicólogos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'posts' %}">Posts</a>
+                    </li>
+                    <li class="nav-item">
+                        {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'create_post' %}">Crear post</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="{% url 'logout' %}">Cerrar sesión</a>
+                        </li>
+                        {% else %}
+                            <li>
+                                <a class="nav-link" href="{% url 'login' %}">Iniciar sesión</a>
+                            </li>
+                            <li>
+                                <a class="nav-link" href="{% url 'register' %}">Registrarse</a>
+                            </li>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <form class="d-flex mb-3" method="get" action="{% url 'home' %}">
+        <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search" name="q" value="{{ query }}">
+        <button class="btn btn-outline-success" type="submit">Buscar</button>
+    </form>
+    <div class="container mt-5">
+        <h2 class="mt-4">Últimos 3 Posts</h2>
+        {% if latest_posts %}
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+                {% for post in latest_posts %}
+                    <div class="col mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3><a href="{% url 'post_detail' post.id %}" class="text-decoration-none">{{ post.title }}</a></h3>
+                                <p class="card-text">{{ post.content }}</p>
+                                <p class="card-text"><small class="text-muted">Autor: {{ post.author.username }} - Creado a las: {{ post.created_at }}</small></p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No hay posts.</p>
+        {% endif %}
+    </div>
 </body>
 </html>

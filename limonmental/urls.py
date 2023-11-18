@@ -23,8 +23,11 @@ urlpatterns = [
     path("register/", views.register, name="register"),
     path("login/", views.user_login, name="login"),
     path("logout/", views.logout_view, name="logout"),
-    path('posts/', views.post_list, name='post_list'),
+    path('posts/', views.post_list, name='posts'),
     path('posts/create/', views.create_post, name='create_post'),
     path('posts/<int:post_id>/comment/', views.create_comment, name='create_comment'),
     path('posts/<int:post_id>/', views.post_detail, name='post_detail'),
+    path('delete_comment/<int:comment_id>/', views.delete_comment, name='delete_comment'),
+    path('delete_post/<int:post_id>/', views.delete_post, name='delete_post'),
+    path('psychologists/', views.psychologists, name='psychologists'),
 ]
