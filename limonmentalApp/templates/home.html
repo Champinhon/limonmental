@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Limón mental 🍋</title>
+    <link rel="icon" href="https://storage.cloud.google.com/limonmental/Disen%CC%83o%20sin%20ti%CC%81tulo%20(5).png?authuser=3" type="image/png" />
+</head>
+<body>
+    {% if user.is_authenticated %}
+        <p>Te damos la bienvenida, {{ user.username }}! <a href="{% url 'logout' %}">Cerrar sesión</a></p>
+        <p><a href="{% url 'create_post' %}">Crear post</a></p>
+    {% else %}
+        <p><a href="{% url 'login' %}">Iniciar sesión</a></p>
+        <p><a href="{% url 'register' %}">Registrarse</a></p>
+    {% endif %}
+    <h2>Últimos Posts</h2>
+
+    {% if latest_posts %}
+        <ul>
+            {% for post in latest_posts %}
+                <li>
+                    <h3><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></h3>
+                    <p>{{ post.content }}</p>
+                    <p>Autor: {{ post.author.username }}</p>
+                    <p>Creado a las: {{ post.created_at }}</p>
+                    <h4>Comentarios</h4>
+                    {% for comment in post.comments.all %}
+                        <p>{{ comment.text }} - {{ comment.author.username }} - {{ comment.created_at }}</p>
+                    {% endfor %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No hay posts.</p>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,103 @@
+from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth import login, authenticate, logout
+from .forms import CustomUserCreationForm, CustomAuthenticationForm
+from .forms import PostForm, CommentForm
+from django.contrib.auth.decorators import login_required
+from .models import Post, Comment
+from django.shortcuts import render, get_object_or_404
+
+def post_list(request):
+    posts = Post.objects.all()
+    return render(request, 'posts/post_list.html', {'posts': posts})
+
+@login_required
+def create_post(request):
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+            return redirect('post_list')
+    else:
+        form = PostForm()
+
+    return render(request, 'posts/create_post.html', {'form': form})
+
+@login_required
+def create_comment(request, post_id):
+    post = Post.objects.get(id=post_id)
+
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.author = request.user
+            comment.post = post
+            comment.save()
+            return redirect('post_list')
+    else:
+        form = CommentForm()
+
+    return render(request, 'posts/create_comment.html', {'form': form, 'post': post})
+def register(request):
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('home') 
+    else:
+        form = CustomUserCreationForm()
+
+    return render(request, 'registration/register.html', {'form': form})
+
+def user_login(request):
+    if request.method == 'POST':
+        form = CustomAuthenticationForm(request, request.POST)
+        if form.is_valid():
+            login(request, form.get_user())
+            return redirect('home') 
+
+    else:
+        form = CustomAuthenticationForm()
+
+    return render(request, 'registration/login.html', {'form': form})
+def logout_view(request):
+    logout(request)
+    return redirect('home')
+
+
+def home(request):
+    latest_posts = Post.objects.order_by('-created_at')[:5]
+
+    context = {
+        'latest_posts': latest_posts,
+    }
+
+    return render(request, 'home.html', context)
+
+def post_detail(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = CommentForm(request.POST)
+            if form.is_valid():
+                comment = form.save(commit=False)
+                comment.author = request.user
+                comment.post = post
+                comment.save()
+                return redirect('post_detail', post_id=post.id)
+        else:
+            form = CommentForm()
+    else:
+        form = None
+
+    context = {
+        'post': post,
+        'comment_form': form,
+    }
+
+    return render(request, 'posts/post_detail.html', context)
