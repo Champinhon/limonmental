@@ -15,7 +15,6 @@ from django.shortcuts import render
 from django.http import JsonResponse
 import json
 from django.contrib.auth import authenticate, login
-
 from openai import OpenAI
 import time
 client = OpenAI(api_key="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")

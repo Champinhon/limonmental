@@ -54,14 +54,16 @@
         </div>
     </nav>
     <div class="container mt-5">
-        <h1>Limoncito</h1>
+        <!-- ... (código existente) ... -->
         <div id="chat-container" class="border p-3 mb-3"></div>
-        <div class="input-group mb-3">
-            <input type="text" id="user-input" class="form-control" placeholder="Escribe tu mensaje...">
-            <div class="input-group-append">
-                <button class="btn btn-primary" onclick="sendMessage()">Enviar</button>
+        <form id="chat-form">
+            <div class="input-group mb-3">
+                <input type="text" id="user-input" class="form-control" placeholder="Escribe tu mensaje...">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">Enviar</button>
+                </div>
             </div>
-        </div>
+        </form>
         <!-- Barra de carga -->
         <div id="loading-spinner" class="spinner-border text-primary d-none" role="status">
             <span class="visually-hidden"></span>
@@ -69,6 +71,11 @@
     </div>
 
     <script>
+        document.getElementById('chat-form').addEventListener('submit', function (event) {
+            event.preventDefault(); // Evita que el formulario se envíe de manera predeterminada
+            sendMessage();
+        });
+
         function sendMessage() {
             var userInput = document.getElementById('user-input').value.trim();
             var chatContainer = document.getElementById('chat-container');
@@ -101,7 +108,6 @@
             document.getElementById('user-input').value = '';
         }
     </script>
-
     <!-- Enlaces a Bootstrap para mejorar el diseño -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
