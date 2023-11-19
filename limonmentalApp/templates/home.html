@@ -51,25 +51,93 @@
             </div>
         </div>
     </nav>
-    <div class="container mt-5">
-        <h2 class="mt-4">Últimos 3 Posts</h2>
-        {% if latest_posts %}
-            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
-                {% for post in latest_posts %}
-                    <div class="col mb-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h3><a href="{% url 'post_detail' post.id %}" class="text-decoration-none">{{ post.title }}</a></h3>
-                                <p class="card-text">{{ post.content }}</p>
-                                <p class="card-text"><small class="text-muted">Autor: {{ post.author.username }} - Creado a las: {{ post.created_at }}</small></p>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-        {% else %}
-            <p>No hay posts.</p>
-        {% endif %}
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .header {
+            background-color: #17a2b8;
+            color: #ffffff;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .features {
+            padding: 50px 0;
+        }
+
+        .feature {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .cta {
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .footer {
+            background-color: #343a40;
+            color: #ffffff;
+            padding: 30px 0;
+            text-align: center;
+        }
+    </style>
+
+    <!-- Header Section -->
+    <div class="header">
+        <h1 class="display-4">Bienvenido a Limón Mental</h1>
+        <p class="lead">Tu compañero virtual para el bienestar mental</p>
+        <a href="#features" class="btn btn-primary btn-lg">Descubre más</a>
     </div>
+
+    <!-- Features Section -->
+    <div id="features" class="features">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="feature">
+                        <h3>Conversaciones Privadas</h3>
+                        <p>Chatea con Limoncito de manera segura y privada para obtener apoyo emocional.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature">
+                        <h3>Recursos para el Bienestar</h3>
+                        <p>Accede a recursos útiles y consejos para mejorar tu bienestar mental.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature">
+                        <h3>Comunidad de Apoyo</h3>
+                        <p>Conéctate con otras personas que buscan apoyo y comprensión.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call to Action Section -->
+    <div class="cta">
+        <div class="container">
+            <h2 class="display-4">Únete a Limón Mental y cuida tu bienestar emocional</h2>
+            <p class="lead">Regístrate ahora para comenzar tu viaje hacia una mejor salud mental.</p>
+            <a href="{% url 'register' %}" class="btn btn-lg btn-light">Registrarse</a>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <div class="footer">
+        <p>&copy; 2023 Limón Mental. Todos los derechos reservados.</p>
+    </div>
+
+    <!-- Bootstrap JS Scripts -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 </body>
 </html>

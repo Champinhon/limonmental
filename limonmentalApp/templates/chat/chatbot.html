@@ -1,16 +1,16 @@
-<!-- chat/chatbot.html -->
+<!-- chat/landing.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Limoncito</title>
+    <title>Limoncito - Tu Compañero Virtual</title>
     <!-- Enlaces a Bootstrap para mejorar el diseño -->
     <link rel="icon" href="https://storage.googleapis.com/limonmental/Disen%CC%83o%20sin%20ti%CC%81tulo%20(5).png" type="image/png" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-ligh">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Limón mental 🍋</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,41 +21,41 @@
                     <li class="nav-item">
                         <a class="nav-link" href="../../">Inicio</a>
                     </li>
-                    
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'psychologists' %}">Psicólogos</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'posts' %}">Posts</a>
                     </li>
-                    <li class="nav-item">
-                        {% if user.is_authenticated %}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'chatbot' %}">Limoncito</a>
+                    </li>
+                    {% if user.is_authenticated %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'create_post' %}">Crear post</a>
                         </li>
                         <li>
-                            <a class="nav-link" href="{% url 'chatbot' %}">Limoncito</a>
-                        </li>
-                        <li>
                             <a class="nav-link" href="{% url 'logout' %}">Cerrar sesión</a>
                         </li>
-                        
-                        {% else %}
-                            <li>
-                                <a class="nav-link" href="{% url 'login' %}">Iniciar sesión</a>
-                            </li>
-                            <li>
-                                <a class="nav-link" href="{% url 'register' %}">Registrarse</a>
-                            </li>
-                        {% endif %}
-                    </li>
+                    {% else %}
+                        <li>
+                            <a class="nav-link" href="{% url 'login' %}">Iniciar sesión</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="{% url 'register' %}">Registrarse</a>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
     </nav>
+
     <div class="container mt-5">
-        <!-- ... (código existente) ... -->
+        <h1>¡Bienvenido a Limoncito!</h1>
+        <p>Tu compañero virtual está aquí para ayudarte. Escribe un mensaje y Limoncito te responderá.</p>
+
         <div id="chat-container" class="border p-3 mb-3"></div>
+        
         <form id="chat-form">
             <div class="input-group mb-3">
                 <input type="text" id="user-input" class="form-control" placeholder="Escribe tu mensaje...">
@@ -64,6 +64,7 @@
                 </div>
             </div>
         </form>
+
         <!-- Barra de carga -->
         <div id="loading-spinner" class="spinner-border text-primary d-none" role="status">
             <span class="visually-hidden"></span>
@@ -75,6 +76,7 @@
             event.preventDefault(); // Evita que el formulario se envíe de manera predeterminada
             sendMessage();
         });
+
         function sendMessage() {
             var userInput = document.getElementById('user-input').value.trim();
             var chatContainer = document.getElementById('chat-container');
@@ -107,9 +109,11 @@
             document.getElementById('user-input').value = '';
         }
     </script>
+
     <!-- Enlaces a Bootstrap para mejorar el diseño -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
+                                               

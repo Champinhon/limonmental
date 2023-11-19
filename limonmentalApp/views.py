@@ -71,14 +71,38 @@ def chatbot(request):
             return JsonResponse({'error': str(e)})
 
     return render(request, 'chat/chatbot.html')
-def psychologists(request):
+# views.py
 
+# views.py
+
+def psychologists(request):
     psychologists_list = [
-        {"name": "Psicólogo 1", "photo": "https://storage.googleapis.com/limonmental/Disen%CC%83o%20sin%20ti%CC%81tulo%20(5).png", "description": "Descripción del psicólogo 1"},
-        {"name": "Psicólogo 2", "photo": "https://storage.googleapis.com/limonmental/53875233-04FA-4805-B538-43655913EC1C.jpg", "description": "Descripción del psicólogo 2"},
+        {"name": "Psicólogo 1", "photo": "https://storage.googleapis.com/limonmental/Disen%CC%83o%20sin%20ti%CC%81tulo%20(5).png", "description": "Descripción del psicólogo 1", "tipo_consulta": "Virtual", "especialidad": "Especialidad 1", "precio": 10000},
+        {"name": "Psicólogo 2", "photo": "https://storage.googleapis.com/limonmental/53875233-04FA-4805-B538-43655913EC1C.jpg", "description": "Descripción del psicólogo 2", "tipo_consulta": "Presencial", "especialidad": "Especialidad 2", "precio": 20000},
     ]
 
-    return render(request, 'psychologists.html', {'psychologists_list': psychologists_list})
+    query = request.GET.get('q')
+    tipo_consulta = request.GET.get('tipo_consulta')
+    especialidad = request.GET.get('especialidad')
+    precio_min = request.GET.get('precio_min')
+    precio_max = request.GET.get('precio_max')
+
+    if query:
+        psychologists_list = [psychologist for psychologist in psychologists_list if query.lower() in psychologist['name'].lower()]
+
+    if tipo_consulta:
+        psychologists_list = [psychologist for psychologist in psychologists_list if tipo_consulta.lower() == psychologist['tipo_consulta'].lower()]
+
+    if especialidad:
+        psychologists_list = [psychologist for psychologist in psychologists_list if especialidad.lower() in psychologist['especialidad'].lower()]
+
+    if precio_min:
+        psychologists_list = [psychologist for psychologist in psychologists_list if psychologist['precio'] >= int(precio_min)]
+
+    if precio_max:
+        psychologists_list = [psychologist for psychologist in psychologists_list if psychologist['precio'] <= int(precio_max)]
+
+    return render(request, 'psychologists.html', {'psychologists_list': psychologists_list, 'query': query, 'tipo_consulta': tipo_consulta, 'especialidad': especialidad, 'precio_min': precio_min, 'precio_max': precio_max})
 
 def is_admin(user):
     return user.is_staff

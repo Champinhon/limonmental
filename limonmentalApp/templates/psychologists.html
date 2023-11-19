@@ -55,23 +55,45 @@
         </div>
     </nav>
 
+    
     <div class="container mt-5">
-        <h2 class="mt-4">Psicólogos</h2>
-        {% for psychologist in psychologists_list %}
-            <div class="card mb-3">
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src="{{ psychologist.photo }}" class="card-img-top img-thumbnail rounded" alt="{{ psychologist.name }}">
-                    </div>
-                    <div class="col-md-8">
+        <h1 class="text-center mb-4">Encuentra al Psicólogo Ideal</h1>
+        <p class="lead text-center">Descubre a nuestros psicólogos altamente calificados y encuentra el apoyo que necesitas.</p>
+        <form method="get" action="{% url 'psychologists' %}">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" name="q" placeholder="Buscar por nombre...">
+                <select class="form-select" name="tipo_consulta" aria-label="Tipo de consulta">
+                    <option value="" selected>Tipo de Consulta</option>
+                    <option value="Virtual">Virtual</option>
+                    <option value="Presencial">Presencial</option>
+                </select>
+                <input type="text" class="form-control" name="especialidad" placeholder="Especialidad">
+                <input type="text" class="form-control" name="precio_min" placeholder="Precio Mínimo">
+                <input type="text" class="form-control" name="precio_max" placeholder="Precio Máximo">
+                <button class="btn btn-outline-secondary" type="submit">Buscar</button>
+            </div>
+        </form>
+
+        {% if query %}
+            <p>Resultados de la búsqueda para: "{{ query }}"</p>
+        {% endif %}
+        <div class="row mt-5">
+            {% for psychologist in psychologists_list %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="{{ psychologist.photo }}" class="card-img-top img-thumbnail rounded" alt="{{ psychologist.name }}" style="width: 100%; height: 400px; object-fit: cover;">
                         <div class="card-body">
                             <h5 class="card-title">{{ psychologist.name }}</h5>
                             <p class="card-text">{{ psychologist.description }}</p>
+                            <p class="card-text">{{ psychologist.tipo_consulta }}</p>
+                            <p class="card-text">{{ psychologist.especialidad }}</p>
+                            <p class="card-text">{{ psychologist.precio }}</p>
                         </div>
                     </div>
                 </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
+    
 </body>
 </html>
