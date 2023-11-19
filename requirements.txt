@@ -1,2 +1,4 @@
 gunicorn
 openai
+django
+Django
