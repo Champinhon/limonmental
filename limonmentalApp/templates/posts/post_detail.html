@@ -35,8 +35,12 @@
                             <a class="nav-link" href="{% url 'create_post' %}">Crear post</a>
                         </li>
                         <li>
+                            <a class="nav-link" href="{% url 'chatbot' %}">Limoncito</a>
+                        </li>
+                        <li>
                             <a class="nav-link" href="{% url 'logout' %}">Cerrar sesión</a>
                         </li>
+                       
                         {% else %}
                             <li>
                                 <a class="nav-link" href="{% url 'login' %}">Iniciar sesión</a>

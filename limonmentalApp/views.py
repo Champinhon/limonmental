@@ -18,22 +18,19 @@ import json
 from openai import OpenAI
 import time
 client = OpenAI(api_key="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")
-
-
 assistant = client.beta.assistants.create(
     name="Limoncito",
-    instructions="Te llamas limoncito, eres un limoncito virtual que ayuda con la salud mental",
+    instructions="Te llamas limoncito, eres un limoncito virtual que ayuda con la salud mental, en español",
     tools=[{"type": "code_interpreter"}],
     model="gpt-3.5-turbo-1106"
 )
-
 def limoncito(mensaje):
     try:
         thread = client.beta.threads.create()
         run = client.beta.threads.runs.create(
             thread_id=thread.id,
             assistant_id=assistant.id,
-            instructions=mensaje
+            instructions=f'Te llamas limoncito, un limoncito virtual que ayuda con la salud mental, en español {mensaje}',
         )
         print(f"Run ID: {run.status}")
         # Espera hasta que la ejecución esté completa
