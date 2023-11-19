@@ -3,3 +3,4 @@ openai
 django
 Django
 requests
+pymysql
