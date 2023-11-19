@@ -16,28 +16,51 @@
             <div class="card">
                 <div class="card-body">
                     <h2 class="card-title">Registro</h2>
-                    
-                    <form method="post">
+                    <form method="post" class="needs-validation" novalidate>
                         {% csrf_token %}
+                    
                         <div class="mb-3">
                             {{ form.username.label_tag }}
-                            {{ form.username }}
+                            <input type="text" name="{{ form.username.name }}" class="form-control" required>
+                            <div class="invalid-feedback">
+                                Por favor, ingresa tu nombre de usuario.
+                            </div>
                         </div>
+                    
                         <div class="mb-3">
                             {{ form.email.label_tag }}
-                            {{ form.email }}
+                            <input type="email" name="{{ form.email.name }}" class="form-control" required>
+                            <div class="invalid-feedback">
+                                Por favor, ingresa una dirección de correo electrónico válida.
+                            </div>
                         </div>
+                    
                         <div class="mb-3">
                             {{ form.password1.label_tag }}
-                            {{ form.password1 }}
+                            <input type="password" name="{{ form.password1.name }}" class="form-control" required>
+                            <div class="invalid-feedback">
+                                La contraseña es obligatoria.
+                            </div>
                         </div>
+                    
                         <div class="mb-3">
                             {{ form.password2.label_tag }}
-                            {{ form.password2 }}
+                            <input type="password" name="{{ form.password2.name }}" class="form-control" required>
+                            <div class="invalid-feedback">
+                                Por favor, confirma tu contraseña.
+                            </div>
                         </div>
+                    
                         <button type="submit" class="btn btn-primary">Registrarse</button>
                     </form>
                 </div>
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
             </div>
         </div>
     </div>

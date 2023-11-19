@@ -9,12 +9,13 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 import json
-import requests
+from django.contrib import messages
 from django.http import JsonResponse
-import openai
 from django.shortcuts import render
 from django.http import JsonResponse
 import json
+from django.contrib.auth import authenticate, login
+
 from openai import OpenAI
 import time
 client = OpenAI(api_key="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")
@@ -138,6 +139,11 @@ def register(request):
             user = form.save()
             login(request, user)
             return redirect('home') 
+        else:
+            # Aquí, si el formulario no es válido, se agregarán mensajes de error
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{field.capitalize()}: {error}")
     else:
         form = CustomUserCreationForm()
 
@@ -145,15 +151,18 @@ def register(request):
 
 def user_login(request):
     if request.method == 'POST':
-        form = CustomAuthenticationForm(request, request.POST)
-        if form.is_valid():
-            login(request, form.get_user())
-            return redirect('home') 
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
 
-    else:
-        form = CustomAuthenticationForm()
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            # Mensaje de error si la autenticación falla
+            messages.error(request, 'Credenciales inválidas. Por favor, inténtalo de nuevo.')
 
-    return render(request, 'registration/login.html', {'form': form})
+    return render(request, 'registration/login.html')
 @login_required
 def logout_view(request):
     logout(request)
