@@ -14,3 +14,11 @@ class Post(models.Model):
     content = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
+
+class Chat(models.Model):
+    user_input = models.TextField()
+    bot_response = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.timestamp} - {self.user_input}'

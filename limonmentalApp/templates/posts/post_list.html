@@ -48,7 +48,16 @@
             </div>
         </div>
     </nav>
-
+    <div class="container mt-3">
+        <form method="get" action="{% url 'post_search' %}" class="row g-2">
+            <div class="col-12 col-lg-6">
+                <input type="text" name="q" class="form-control" placeholder="Buscar...">
+            </div>
+            <div class="col-12 col-lg-2">
+                <button type="submit" class="btn btn-outline-primary">Buscar</button>
+            </div>
+        </form>
+    </div>
     <div class="container mt-5">
         <h2 class="mt-4">Todos los Posts</h2>
 

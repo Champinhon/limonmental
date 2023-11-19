@@ -1,15 +1,81 @@
 from django.shortcuts import render
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth import login, logout
 from .forms import CustomUserCreationForm, CustomAuthenticationForm
 from .forms import PostForm, CommentForm
 from django.contrib.auth.decorators import login_required
 from .models import Post, Comment
 from django.shortcuts import render, get_object_or_404
-from django.contrib.auth.decorators import user_passes_test
 from django.http import HttpResponse
+from django.shortcuts import render, redirect
+import json
+import requests
+from django.http import JsonResponse
+import openai
+from django.shortcuts import render
+from django.http import JsonResponse
+import json
+from openai import OpenAI
+import time
+client = OpenAI(api_key="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")
 
+
+assistant = client.beta.assistants.create(
+    name="Limoncito",
+    instructions="Te llamas limoncito, eres un limoncito virtual que ayuda con la salud mental",
+    tools=[{"type": "code_interpreter"}],
+    model="gpt-3.5-turbo-1106"
+)
+
+def limoncito(mensaje):
+    try:
+        thread = client.beta.threads.create()
+        run = client.beta.threads.runs.create(
+            thread_id=thread.id,
+            assistant_id=assistant.id,
+            instructions=mensaje
+        )
+        print(f"Run ID: {run.status}")
+        # Espera hasta que la ejecución esté completa
+        while run.status == "queued" or run.status == "running":
+            time.sleep(5)
+            run = client.beta.threads.runs.retrieve(
+                thread_id=thread.id,
+                run_id=run.id
+            )
+        if run.status == "completed":
+            messages = client.beta.threads.messages.list(
+                thread_id=thread.id
+            )
+            conversation = [
+                {"role": msg.role, "content": msg.content[0].text.value}
+                for msg in messages.data
+            ]
+            print('conversacion', conversation[0]['content'])
+            return conversation[0]['content']
+
+    except Exception as e:
+        print(f"Error: {e}")
+
+    return []
+def chatbot(request):
+    if request.method == 'POST':
+        try:
+            user_message = json.loads(request.body.decode('utf-8'))['message']
+            print(f"Usuario: {user_message}")
+
+            # Obtén la respuesta del asistente
+            conversation = limoncito(user_message)
+
+            # Devuelve la respuesta del bot como JSON
+            return JsonResponse({'bot_response': conversation})
+
+        except Exception as e:
+            return JsonResponse({'error': str(e)})
+
+    return render(request, 'chat/chatbot.html')
 def psychologists(request):
+
     psychologists_list = [
         {"name": "Psicólogo 1", "photo": "https://storage.googleapis.com/limonmental/Disen%CC%83o%20sin%20ti%CC%81tulo%20(5).png", "description": "Descripción del psicólogo 1"},
         {"name": "Psicólogo 2", "photo": "https://storage.googleapis.com/limonmental/53875233-04FA-4805-B538-43655913EC1C.jpg", "description": "Descripción del psicólogo 2"},
@@ -35,10 +101,9 @@ def delete_post(request, post_id):
     return HttpResponse("No tienes permisos para borrar este post.")
 
 def post_list(request):
-    latest_posts = Post.objects.all().order_by('-created_at')
-
-    return render(request, 'posts/post_list.html', {'latest_posts': latest_posts})
-
+    posts = Post.objects.order_by('-created_at') 
+    context = {'latest_posts': posts}
+    return render(request, 'posts/post_list.html', context)
 @login_required
 def create_post(request):
     if request.method == 'POST':
@@ -96,7 +161,15 @@ def user_login(request):
 def logout_view(request):
     logout(request)
     return redirect('home')
+def post_search(request):
+    query = request.GET.get('q')
+    posts = Post.objects.all()
 
+    if query:
+        posts = posts.filter(title__icontains=query)
+
+    context = {'latest_posts': posts, 'query': query}
+    return render(request, 'posts/post_list.html', context)
 
 def home(request):
     query = request.GET.get('q')
