@@ -4,8 +4,14 @@ from django.http import HttpResponse, JsonResponse
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.csrf import csrf_exempt
+'''from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
+from django.core.mail import send_mail
+from django.contrib.sites.shortcuts import get_current_site
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_text
+from django.contrib.auth.tokens import default_token_generator
+from django.contrib.auth.models import User'''
 
 # Importaciones de tus aplicaciones y modelos
 from .forms import CustomUserCreationForm, CustomAuthenticationForm, PostForm, CommentForm
@@ -30,8 +36,16 @@ def submit_message(assistant_id, thread, user_message):
         thread_id=thread.id,
         assistant_id=assistant_id,
     )
+'''
+def send_verification_email(user, request):
+    token = default_token_generator.make_token(user)
+    uid = urlsafe_base64_encode(force_bytes(user.pk))
+    domain = get_current_site(request).domain
+    link = f"http://{domain}/verify-email/{uid}/{token}/"
 
-
+    subject = 'Verifica tu cuenta'
+    message = f'Por favor, verifica tu cuenta haciendo clic en el siguiente enlace: {link}'
+    send_mail(subject, message, 'contacto@limonmental.com', [user.email])'''
 def get_response(thread):
     return client.beta.threads.messages.list(thread_id=thread.id, order="asc")
 # Define una función para enviar un mensaje al asistente
@@ -39,7 +53,22 @@ def create_thread_and_run(user_input):
     thread = client.beta.threads.create()
     run = submit_message(LIMONCITO_ID, thread, user_input)
     return thread, run
+'''
+def verify_email(request, uidb64, token):
+    try:
+        uid = force_text(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
 
+    if user is not None and default_token_generator.check_token(user, token):
+        user.profile.email_verified = True  # Asumiendo que tienes un campo 'email_verified' en tu modelo de perfil
+        user.profile.save()
+        # Redirigir a una página de éxito o similar
+        return redirect('success_page')
+    else:
+        # Redirigir a una página de error o similar
+        return redirect('error_page')'''
 # Waiting in a loop
 def wait_on_run(run, thread):
     while run.status == "queued" or run.status == "in_progress":

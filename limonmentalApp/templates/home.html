@@ -1,143 +1,301 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Limón mental 🍋</title>
+    <title>Limón Mental 🍋 - Tu Compañero Virtual</title>
     <link rel="icon" href="https://storage.googleapis.com/limonmental/Disen%CC%83o%20sin%20ti%CC%81tulo%20(5).png" type="image/png" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
 </head>
+<style>
+    :root{
+       --green: #16a085;
+       --black: #444;
+       --light-color: #777;
+       --box-shadow: .5rem .5rem 0rem rgba(22,160,133,.2);
+       --text-shadow: .5rem .5rem 0rem rgba(0,0,0,.2);
+        --border: .2rem solid var(--green);
+    }
+    *{
+        font-family: 'Poppins', sans-serif;
+        margin: 0; padding: 0;
+        box-sizing: border-box;
+        outline: none; border: none;
+        text-transform: capitalize;
+        transition: all .2s ease-out;
+        text-decoration: none;
+    }
+    html{
+        font-size: 62.5%;
+        overflow-x: hidden;
+        scroll-padding-top: 7rem;
+        scroll-behavior: smooth;
+    }
+    section{
+        padding: 2rem 9%;
+    }
+    .home{
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        padding-top: 10rem;
+    }
+    .home .image{
+        flex: 1 1 45rem;
+    }
+    .home .image img{
+        width: 100%;
+    }
+    .home .content{
+        flex: 1 1 45rem;
+    }   
+    .btn{
+        margin-top: 1rem;
+        padding: .5rem;
+        padding-left: 1rem;
+        border: var(--border);
+        border-radius: .5rem;
+        box-shadow: var(--box-shadow);
+        color: var(--green);
+        cursor: pointer;
+        font-size: 1.7rem;
+    }
+    .btn span{
+        padding: .7rem 1rem;
+        border-radius: .5rem;
+        background: var(--green);
+        color: #fff;
+        margin-left: .5rem;
+    }
+    .btn:hover{
+        color: var(--green);
+        background-color: #fff;
+    }
+    .home .content h3{
+        font-size: 4.5rem;
+        color: var(--black);
+        line-height: 1.8;
+    }
+    .home .content p{
+        font-size: 1.7rem;
+        color: var(--light-color);
+        line-height: 1.8;
+        padding: 1rem 0;
+    }
+    .headercss{
+        padding:2rem 9%;
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        z-index: 1000;
+        box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .1);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #fff;
+    }
+    .headercss .logo{
+        font-size: 2.5rem;
+        color: var(--black);
+    }
+    .headercss .logo i{
+        color: var(--green);
+    }
+    .headercss .navbar a{
+        font-size: 1.7rem;
+        color: var(--light-color);
+        margin-left: 2rem;
+    }
+    .headercss .navbar a:hover{
+        color: var(--green)
+    }
+    #menu-btn{
+        font-size: 2.5rem;
+        border-radius: .5rem;
+        background: #eee;
+        color: var(--green);
+        padding: 1rem 1.5rem;
+        cursor: pointer;
+        display: none;
+    }
+    @media (max-width: 991px){
+         html{
+            font-size: 55%;
+         }
+         .headercss{
+            padding: 2rem;
+         }
+    }
+    @media (max-width: 450px){
+         html{
+            font-size: 50%;
+         }
+
+    }
+    @media (max-width: 768px){
+        #menu-btn{
+            display: initial;
+        }
+        .headercss .navbar{
+            position: absolute;
+            top: 115%; right: 2rem;
+            border-radius: .5rem;
+            box-shadow: var(--box-shadow);
+            border: var(--border);
+            width: 30rem;
+            background: #fff;
+            transform: scale(0);
+            opacity: 0;
+            transform-origin: top right;
+            transition: none;
+
+        }
+        .headercss .navbar a{
+            font-size: 2rem;
+            display: block;
+            margin: 2.5rem;
+        }
+        .headercss .navbar.active {
+            transform: scale(1);
+            opacity: 1;
+            transition: .2s ease-out;
+        }
+    }
+    .section:nth-child(even){
+        background: #f5f5f5;
+    }
+    .icon-container{
+        display: grid;
+        gap: 2rem;
+        grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+    }
+    .icon-container .icons{
+        border: var(--border);
+        border-radius: .5rem;
+        box-shadow: var(--box-shadow);
+        text-align: center;
+        padding: 2.5rem;
+    }
+    .icon-container .icons i{
+       font-size: 4.5rem;
+       color: var(--green);
+       padding-bottom: .7rem;
+
+    }
+    .icon-container .icons h3{
+       font-size: 2.5rem;
+       color: var(--black);
+       padding-bottom: .5rem 0;
+       
+    }
+    .icon-container .icons p{
+       font-size: 1.7rem;
+       color: var(--light-color);
+    }
+    .about .row{
+        display: flex;
+        align-items: var(--green);
+        flex-wrap: wrap;
+        gap: 2rem;
+    }
+    .about .row .content h3{
+        color: var(--black);
+        font-size: 4rem;
+        line-height: 1.8;
+    }
+    .about .row .content p{
+        color: var(--light-color);
+        font-size: 1.5rem;
+        padding: 1rem 0;
+        line-height: 1.8;
+    }
+    .heading{
+        text-align: center;
+        padding-bottom: 2rem;
+        color: var(--black);
+        text-transform: uppercase;
+        font-size: 5rem;
+        letter-spacing: .4rem;
+    }
+    .heading span{
+        color: var(--green);
+        text-transform: uppercase;
+    }
+    a{
+        text-decoration: none;
+    }
+</style>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-ligh">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Limón mental 🍋</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="../../">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'psychologists' %}">Psicólogos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'posts' %}">Posts</a>
-                    </li>
-                    <li class="nav-item">
-                        {% if user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'create_post' %}">Crear post</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="{% url 'chatbot' %}">Limoncito</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="{% url 'logout' %}">Cerrar sesión</a>
-                        </li>
-                        
-                        {% else %}
-                            <li>
-                                <a class="nav-link" href="{% url 'login' %}">Iniciar sesión</a>
-                            </li>
-                            <li>
-                                <a class="nav-link" href="{% url 'register' %}">Registrarse</a>
-                            </li>
-                        {% endif %}
-                    </li>
-                </ul>
-            </div>
-        </div>
+ <header class="headercss">
+    <a href="../../" class="logo"><i class="fas fa-heartbeat"></i> Limón mental 🍋</a>
+    <nav class="navbar">
+        <a href="{% url 'psychologists' %}">Psicólogos</a>
+        <a href="{% url 'posts' %}">Posts</a>
+        {% if user.is_authenticated %}
+        <a href="{% url 'create_post' %}">Crear post</a>
+        <a href="{% url 'chatbot' %}">Limoncito</a>
+        <a href="{% url 'logout' %}">Cerrar sesión</a>
+        {% else %}
+            <a href="{% url 'login' %}">Iniciar sesión</a>
+            <a href="{% url 'register' %}">Registrarse</a>
+        {% endif %}
     </nav>
-    <style>
-        body {
-            background-color: #f8f9fa;
-        }
-
-        .header {
-            background-color: #17a2b8;
-            color: #ffffff;
-            padding: 80px 0;
-            text-align: center;
-        }
-
-        .features {
-            padding: 50px 0;
-        }
-
-        .feature {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .cta {
-            background-color: #007bff;
-            color: #ffffff;
-            padding: 60px 0;
-            text-align: center;
-        }
-
-        .footer {
-            background-color: #343a40;
-            color: #ffffff;
-            padding: 30px 0;
-            text-align: center;
-        }
-    </style>
-
-    <!-- Header Section -->
-    <div class="header">
-        <h1 class="display-4">Bienvenido a Limón Mental</h1>
-        <p class="lead">Tu compañero virtual para el bienestar mental</p>
-        <a href="#features" class="btn btn-primary btn-lg">Descubre más</a>
+    <div id="menu-btn" class="fas fa-bars"></div>
+ </header>
+ <section class="home" id="home">
+    <div class="image">
+        <img src="https://storage.googleapis.com/limonmental/6164-removebg-preview.png" alt="">
     </div>
-
-    <!-- Features Section -->
-    <div id="features" class="features">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="feature">
-                        <h3>Conversaciones Privadas</h3>
-                        <p>Chatea con Limoncito de manera segura y privada para obtener apoyo emocional.</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="feature">
-                        <h3>Recursos para el Bienestar</h3>
-                        <p>Accede a recursos útiles y consejos para mejorar tu bienestar mental.</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="feature">
-                        <h3>Comunidad de Apoyo</h3>
-                        <p>Conéctate con otras personas que buscan apoyo y comprensión.</p>
-                    </div>
-                </div>
-            </div>
+    <div class="content">
+        <h3>¡Tu salud mental importa!</h3>
+        <p>En un mundo lleno de desafíos y estrés, es esencial cuidar de tu salud mental. En Limón mental 🍋, estamos aquí para ofrecerte el apoyo y los recursos necesarios para tu bienestar emocional. Creemos en la importancia de la salud mental y estamos comprometidos a ayudarte a vivir una vida plena y equilibrada</p>
+    </div>
+ </section>
+ <section class="icon-container">
+    <div class="icons">
+        <i class="fas fa-user-md"></i>
+        <h3>Conversaciones Privadas</h3>
+        <p>Chatea con Limoncito de manera segura y privada para obtener apoyo emocional.</p>
+    </div>
+    <div class="icons">
+        <i class="fas fa-procedures"></i>
+        <h3>Recursos para el Bienestar</h3>
+        <p>Accede a recursos útiles y consejos para mejorar tu bienestar mental.</p>
+    </div>
+    <div class="icons">
+        <i class="fas fa-users"></i>
+        <h3>Comunidad de Apoyo</h3>
+        <p>Conéctate con otras personas que buscan apoyo y comprensión.</p>
+    </div>
+ </section>
+<section class="about" id="about">
+    <h1 class="heading"><span>Sobre </span>nosotros</h1>
+    <div class="row">
+        <div class="content">
+            <h3>Te apoyamos en tu recuperación</h3>
+            <p>En Limón mental 🍋, creemos en el poder de la salud mental y estamos comprometidos con tu bienestar emocional. Nuestra misión es proporcionarte el apoyo y los recursos necesarios para que puedas vivir una vida equilibrada y saludable desde el punto de vista emocional.</p>
+            <p>En Limón Mental 🍋, tu bienestar mental es nuestra prioridad número uno. Agradecemos la confianza que has depositado en nosotros y estamos comprometidos a seguir trabajando incansablemente para ayudarte a vivir una vida emocionalmente saludable y equilibrada. ¡Gracias por ser parte de nuestra comunidad!</p>
         </div>
     </div>
-
-    <!-- Call to Action Section -->
-    <div class="cta">
-        <div class="container">
-            <h2 class="display-4">Únete a Limón Mental y cuida tu bienestar emocional</h2>
-            <p class="lead">Regístrate ahora para comenzar tu viaje hacia una mejor salud mental.</p>
-            <a href="{% url 'register' %}" class="btn btn-lg btn-light">Registrarse</a>
-        </div>
-    </div>
-
-    <!-- Footer Section -->
-    <div class="footer">
-        <p>&copy; 2023 Limón Mental. Todos los derechos reservados.</p>
-    </div>
-
-    <!-- Bootstrap JS Scripts -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
+</section>
+    <script>
+        let menu = document.querySelector('#menu-btn');
+        let navbar = document.querySelector('.navbar');
+        menu.onclick = () =>{
+            menu.classList.toggle('fa-times');
+            navbar.classList.toggle('active');
+        }
+        window.onscroll = () =>{
+            menu.classList.remove('fa-times');
+            navbar.classList.remove('active');
+        }
+    </script>
 </body>
 </html>

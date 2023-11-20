@@ -32,5 +32,6 @@ urlpatterns = [
     path('psychologists/', views.psychologists, name='psychologists'),
     path('posts/search/', views.post_search, name='post_search'),
     path('chatbot/', views.chatbot, name='chatbot'),
-
+    #path('verify-email/<uidb64>/<token>/', views.verify_email, name='verify_email'),
+    
 ]
