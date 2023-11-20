@@ -14,45 +14,59 @@ from .models import Post, Comment
 # Importaciones de terceros y estándar de Python
 import json
 import time
-import openai 
+import openai
+from openai import OpenAI
+
+# Configura tu clave de API de OpenAI
+LIMONCITO_ID =  'asst_UThm4Tl2qJMEETmmGjI4gccQ'
+
+client = OpenAI(api_key = "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")
+
+def submit_message(assistant_id, thread, user_message):
+    client.beta.threads.messages.create(
+        thread_id=thread.id, role="user", content=user_message
+    )
+    return client.beta.threads.runs.create(
+        thread_id=thread.id,
+        assistant_id=assistant_id,
+    )
+
+
+def get_response(thread):
+    return client.beta.threads.messages.list(thread_id=thread.id, order="asc")
+# Define una función para enviar un mensaje al asistente
+def create_thread_and_run(user_input):
+    thread = client.beta.threads.create()
+    run = submit_message(LIMONCITO_ID, thread, user_input)
+    return thread, run
+
+# Waiting in a loop
+def wait_on_run(run, thread):
+    while run.status == "queued" or run.status == "in_progress":
+        run = client.beta.threads.runs.retrieve(
+            thread_id=thread.id,
+            run_id=run.id,
+        )
+        time.sleep(0.5)
+    return run
 
 def limoncito(mensaje):
-    chat_history = []
-    try:
-        openai.api_key = "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"
-        if mensaje == "exit":
-            return "Adiós, gracias por usar Limoncito."
-        elif mensaje == "como te llamas" or mensaje == "cómo te llamas" or mensaje == "como te llamas?" or mensaje == "cómo te llamas?" or mensaje ==  "Cómo te llamas" or mensaje ==  "Como te llamas" or mensaje ==  "Cómo te llamas?" or mensaje ==  "Como te llamas?" or mensaje ==  "¿Cómo te llamas?" or mensaje ==  "¿Como te llamas?" or mensaje ==  "¿Cómo te llamas" or mensaje ==  "¿Como te llamas" or mensaje ==  "¿Cómo te llamas?" or mensaje ==  "¿Como te llamas?" or mensaje ==  "¿cómo te llamas" or mensaje ==  "¿como te llamas" or mensaje ==  "¿cómo te llamas?" or mensaje ==  "¿como te llamas?":
-            return "Mi nombre es Limoncito."
-        else:
-            chat_history.append({"role": "user", "content": f'{mensaje}'})
-            response_iterator = openai.ChatCompletion.create(
-                model="gpt-3.5-turbo",
-                messages = chat_history,
-                stream=True,
-            )
-            collected_messages = []
-            for chunk in response_iterator:
-                chunk_message = chunk['choices'][0]['delta'] 
-                collected_messages.append(chunk_message) 
-                full_reply_content = ''.join([m.get('content', '') for m in collected_messages])
-                print(full_reply_content)
-
-                print("\033[H\033[J", end="")
-
-            chat_history.append({"role": "assistant", "content": full_reply_content})
-            full_reply_content = ''.join([m.get('content', '') for m in collected_messages])
-            print(f"GPT: {full_reply_content}")
-            return full_reply_content
-    except Exception as e:
-        print(f"Error: {e}")
-        return "Lo siento, hubo un error al procesar tu solicitud."
+    thread1, run1 = create_thread_and_run(
+    mensaje
+    )
+    run1 = wait_on_run(run1, thread1)
+    messages = get_response(thread1)
+    
+    for message in messages.data:
+        if message.role == "assistant":
+            return message.content[0].text.value
 def chatbot(request):
     if request.method == 'POST':
         try:
             body = json.loads(request.body)
             message = body.get('message', '')
             response = limoncito(message)
+            print(response)
             return JsonResponse({'message': message, 'response': response})
         except json.JSONDecodeError as e:
             return JsonResponse({'error': str(e)}, status=400)

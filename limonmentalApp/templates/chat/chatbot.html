@@ -1,4 +1,3 @@
-<!-- chat/landing.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,6 +61,7 @@
         {% endif %}
         <div id="chat-container" class="mt-3">
         </div>
+        <!-- Indicador de carga -->
         <div id="loading-spinner" class="spinner-border text-primary d-none" role="status">
             <span class="visually-hidden"></span>
         </div>
@@ -75,15 +75,13 @@
                 </div>
             </div>
         </form>
-        
-       
     </div>
 
-    <!-- ... enlaces a JavaScript, Bootstrap ... -->
-    <!-- Eliminar el script anterior si ya no se necesita -->
+    <!-- Código JavaScript -->
     <script>
         document.getElementById('chat-form').addEventListener('submit', function(event) {
             event.preventDefault();
+
             var userInput = document.getElementById('user-input').value.trim();
             var chatContainer = document.getElementById('chat-container');
             var csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
@@ -91,9 +89,13 @@
             if (!userInput) {
                 return;
             }
-    
+            
+            // Mostrar el indicador de carga
+            document.getElementById('loading-spinner').classList.remove('d-none');
+            document.querySelector('button[type="submit"]').disabled = true;
+            
             chatContainer.innerHTML += '<p><strong>Tú:</strong> ' + userInput + '</p>';
-    
+            
             fetch('/chatbot/', {
                 method: 'POST',
                 headers: {
@@ -106,9 +108,14 @@
             .then(data => {
                 var botResponse = data.response; // Asegúrate de que 'data.response' es la respuesta del bot
                 typeMessage(botResponse, chatContainer);
+                
+                // Ocultar el indicador de carga y habilitar el botón de envío
+                document.getElementById('loading-spinner').classList.add('d-none');
+                document.querySelector('button[type="submit"]').disabled = false;
             })
             .catch(error => console.error('Error:', error));
-    
+            
+            // Restablecer el valor del input
             document.getElementById('user-input').value = '';
         });
     
@@ -116,7 +123,7 @@
             var i = 0;
             var typingSpeed = 25; // Velocidad en milisegundos
             var botMessageElement = document.createElement('p');
-            botMessageElement.innerHTML = '<strong>Limoncito:</strong> ';
+            botMessageElement.innerHTML = '<strong>Limoncito: </strong> ';
             container.appendChild(botMessageElement);
     
             function typing() {
@@ -130,9 +137,9 @@
         }
     </script>
     
+    <!-- Enlaces a JavaScript, Bootstrap ... -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
-                                               
