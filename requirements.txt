@@ -1,6 +1,6 @@
 gunicorn
-openai
-django
+openai == 0.28.0
+django 
 Django
 requests
 pymysql

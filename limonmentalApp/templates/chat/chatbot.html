@@ -54,63 +54,82 @@
         <h1>¡Bienvenido a Limoncito!</h1>
         <p>Tu compañero virtual está aquí para ayudarte. Escribe un mensaje y Limoncito te responderá.</p>
 
-        <div id="chat-container" class="border p-3 mb-3"></div>
-        
+        <!-- Mostrar la respuesta del chatbot si está disponible -->
+        {% if bot_response %}
+            <div id="chat-response" class="alert alert-info">
+                <strong>Limoncito:</strong> {{ bot_response }}
+            </div>
+        {% endif %}
+        <div id="chat-container" class="mt-3">
+        </div>
+        <div id="loading-spinner" class="spinner-border text-primary d-none" role="status">
+            <span class="visually-hidden"></span>
+        </div>
+        <!-- Formulario para enviar mensaje al chatbot -->
         <form id="chat-form">
+            {% csrf_token %}
             <div class="input-group mb-3">
-                <input type="text" id="user-input" class="form-control" placeholder="Escribe tu mensaje...">
+                <input type="text" name="message" id="user-input" class="form-control" placeholder="Escribe tu mensaje...">
                 <div class="input-group-append">
                     <button class="btn btn-primary" type="submit">Enviar</button>
                 </div>
             </div>
         </form>
-
-        <!-- Barra de carga -->
-        <div id="loading-spinner" class="spinner-border text-primary d-none" role="status">
-            <span class="visually-hidden"></span>
-        </div>
+        
+       
     </div>
 
+    <!-- ... enlaces a JavaScript, Bootstrap ... -->
+    <!-- Eliminar el script anterior si ya no se necesita -->
     <script>
-        document.getElementById('chat-form').addEventListener('submit', function (event) {
-            event.preventDefault(); // Evita que el formulario se envíe de manera predeterminada
-            sendMessage();
-        });
-
-        function sendMessage() {
+        document.getElementById('chat-form').addEventListener('submit', function(event) {
+            event.preventDefault();
             var userInput = document.getElementById('user-input').value.trim();
             var chatContainer = document.getElementById('chat-container');
-            var loadingSpinner = document.getElementById('loading-spinner');
+            var csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
             
             if (!userInput) {
                 return;
             }
-
-            loadingSpinner.classList.remove('d-none');
-
+    
             chatContainer.innerHTML += '<p><strong>Tú:</strong> ' + userInput + '</p>';
-
+    
             fetch('/chatbot/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-CSRFToken': '{{ csrf_token }}' 
+                    'X-CSRFToken': csrfToken
                 },
                 body: JSON.stringify({ 'message': userInput })
             })
             .then(response => response.json())
             .then(data => {
-                loadingSpinner.classList.add('d-none');
-                
-                chatContainer.innerHTML += '<p><strong>Limoncito:</strong> ' + data.bot_response + '</p>';
+                var botResponse = data.response; // Asegúrate de que 'data.response' es la respuesta del bot
+                typeMessage(botResponse, chatContainer);
             })
             .catch(error => console.error('Error:', error));
-            
+    
             document.getElementById('user-input').value = '';
+        });
+    
+        function typeMessage(message, container) {
+            var i = 0;
+            var typingSpeed = 50; // Velocidad en milisegundos
+            var botMessageElement = document.createElement('p');
+            botMessageElement.innerHTML = '<strong>Limoncito:</strong> ';
+            container.appendChild(botMessageElement);
+    
+            function typing() {
+                if (i < message.length) {
+                    botMessageElement.innerHTML += message.charAt(i);
+                    i++;
+                    setTimeout(typing, typingSpeed);
+                }
+            }
+            typing();
         }
     </script>
-
-    <!-- Enlaces a Bootstrap para mejorar el diseño -->
+    
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>

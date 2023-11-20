@@ -1,80 +1,65 @@
-from django.shortcuts import render
-from django.shortcuts import render, redirect
-from django.contrib.auth import login, logout
-from .forms import CustomUserCreationForm, CustomAuthenticationForm
-from .forms import PostForm, CommentForm
-from django.contrib.auth.decorators import login_required
-from .models import Post, Comment
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
-from django.shortcuts import render, redirect
-import json
+# Importaciones de Django para vistas y autenticación
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse, JsonResponse
 from django.contrib import messages
-from django.http import JsonResponse
-from django.shortcuts import render
-from django.http import JsonResponse
-import json
-from django.contrib.auth import authenticate, login
-from openai import OpenAI
-import time
-client = OpenAI(api_key="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")
-assistant = client.beta.assistants.create(
-    name="Limoncito",
-    instructions="Te llamas limoncito, eres un limoncito virtual que ayuda con la salud mental, en español",
-    tools=[{"type": "code_interpreter"}],
-    model="gpt-3.5-turbo-1106"
-)
-def limoncito(mensaje):
-    try:
-        thread = client.beta.threads.create()
-        run = client.beta.threads.runs.create(
-            thread_id=thread.id,
-            assistant_id=assistant.id,
-            instructions=f'Te llamas limoncito, un limoncito virtual que ayuda con la salud mental, en español {mensaje}',
-        )
-        print(f"Run ID: {run.status}")
-        # Espera hasta que la ejecución esté completa
-        while run.status == "queued" or run.status == "running":
-            time.sleep(5)
-            run = client.beta.threads.runs.retrieve(
-                thread_id=thread.id,
-                run_id=run.id
-            )
-        if run.status == "completed":
-            messages = client.beta.threads.messages.list(
-                thread_id=thread.id
-            )
-            conversation = [
-                {"role": msg.role, "content": msg.content[0].text.value}
-                for msg in messages.data
-            ]
-            print('conversacion', conversation[0]['content'])
-            return conversation[0]['content']
+from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_http_methods
 
+# Importaciones de tus aplicaciones y modelos
+from .forms import CustomUserCreationForm, CustomAuthenticationForm, PostForm, CommentForm
+from .models import Post, Comment
+
+# Importaciones de terceros y estándar de Python
+import json
+import time
+import openai 
+
+def limoncito(mensaje):
+    chat_history = []
+    try:
+        openai.api_key = "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"
+        if mensaje == "exit":
+            return "Adiós, gracias por usar Limoncito."
+        else:
+            chat_history.append({"role": "user", "content": mensaje})
+            response_iterator = openai.ChatCompletion.create(
+                model="gpt-3.5-turbo",
+                messages = chat_history,
+                stream=True,
+            )
+            collected_messages = []
+            for chunk in response_iterator:
+                chunk_message = chunk['choices'][0]['delta'] 
+                collected_messages.append(chunk_message) 
+                full_reply_content = ''.join([m.get('content', '') for m in collected_messages])
+                print(full_reply_content)
+
+                # clear the terminal
+                print("\033[H\033[J", end="")
+
+            chat_history.append({"role": "assistant", "content": full_reply_content})
+            full_reply_content = ''.join([m.get('content', '') for m in collected_messages])
+            print(f"GPT: {full_reply_content}")
+            return full_reply_content
     except Exception as e:
         print(f"Error: {e}")
-
-    return []
+        return "Lo siento, hubo un error al procesar tu solicitud."
 def chatbot(request):
     if request.method == 'POST':
         try:
-            user_message = json.loads(request.body.decode('utf-8'))['message']
-            print(f"Usuario: {user_message}")
+            body = json.loads(request.body)
+            message = body.get('message', '')
+            response = limoncito(message)
+            return JsonResponse({'message': message, 'response': response})
+        except json.JSONDecodeError as e:
+            return JsonResponse({'error': str(e)}, status=400)
 
-            # Obtén la respuesta del asistente
-            conversation = limoncito(user_message)
+    elif request.method == 'GET':
+        return render(request, 'chat/chatbot.html')
 
-            # Devuelve la respuesta del bot como JSON
-            return JsonResponse({'bot_response': conversation})
-
-        except Exception as e:
-            return JsonResponse({'error': str(e)})
-
-    return render(request, 'chat/chatbot.html')
-# views.py
-
-# views.py
-
+    return JsonResponse({'error': 'Método no permitido'}, status=405)
 def psychologists(request):
     psychologists_list = [
         {"name": "Psicólogo 1", "photo": "https://storage.googleapis.com/limonmental/Disen%CC%83o%20sin%20ti%CC%81tulo%20(5).png", "description": "Descripción del psicólogo 1", "tipo_consulta": "Virtual", "especialidad": "Especialidad 1", "precio": 10000},
