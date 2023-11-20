@@ -22,8 +22,10 @@ def limoncito(mensaje):
         openai.api_key = "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"
         if mensaje == "exit":
             return "Adiós, gracias por usar Limoncito."
+        elif mensaje == "como te llamas" or mensaje == "cómo te llamas" or mensaje == "como te llamas?" or mensaje == "cómo te llamas?" or mensaje ==  "Cómo te llamas" or mensaje ==  "Como te llamas" or mensaje ==  "Cómo te llamas?" or mensaje ==  "Como te llamas?" or mensaje ==  "¿Cómo te llamas?" or mensaje ==  "¿Como te llamas?" or mensaje ==  "¿Cómo te llamas" or mensaje ==  "¿Como te llamas" or mensaje ==  "¿Cómo te llamas?" or mensaje ==  "¿Como te llamas?" or mensaje ==  "¿cómo te llamas" or mensaje ==  "¿como te llamas" or mensaje ==  "¿cómo te llamas?" or mensaje ==  "¿como te llamas?":
+            return "Mi nombre es Limoncito."
         else:
-            chat_history.append({"role": "user", "content": mensaje})
+            chat_history.append({"role": "user", "content": f'{mensaje}'})
             response_iterator = openai.ChatCompletion.create(
                 model="gpt-3.5-turbo",
                 messages = chat_history,
@@ -36,7 +38,6 @@ def limoncito(mensaje):
                 full_reply_content = ''.join([m.get('content', '') for m in collected_messages])
                 print(full_reply_content)
 
-                # clear the terminal
                 print("\033[H\033[J", end="")
 
             chat_history.append({"role": "assistant", "content": full_reply_content})
