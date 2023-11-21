@@ -24,7 +24,7 @@ import openai
 from openai import OpenAI
 
 # Configura tu clave de API de OpenAI
-LIMONCITO_ID =  'asst_UThm4Tl2qJMEETmmGjI4gccQ'
+LIMONCITO_ID =  'asst_kiVue3Z0DecLT8PRXbRUs53e'
 
 client = OpenAI(api_key = "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")
 
