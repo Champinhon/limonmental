@@ -266,6 +266,16 @@
             gap: 1.5rem;
             padding-top: 10rem;
         }
+        .parrafo{
+            font-size: 1.7rem;
+            color: var(--light-color);
+            line-height: 1.8;
+            padding: 1rem 0;
+        }
+        .titulo{
+            color: var(--green);    
+            font-size: 3.5rem;
+        }
     </style>
 <body>
     <header class="headercss">
@@ -310,11 +320,11 @@
                     <div class="card">
                         <img src="{{ psychologist.photo }}" class="card-img-top img-thumbnail rounded" alt="{{ psychologist.name }}" style="width: 100%; height: 400px; object-fit: cover;">
                         <div class="card-body">
-                            <h5 class="card-title">{{ psychologist.name }}</h5>
-                            <p class="card-text">{{ psychologist.description }}</p>
-                            <p class="card-text">{{ psychologist.tipo_consulta }}</p>
-                            <p class="card-text">{{ psychologist.especialidad }}</p>
-                            <p class="card-text">{{ psychologist.precio }}</p>
+                            <h5 class="titulo">{{ psychologist.name }}</h5>
+                            <p class="parrafo">{{ psychologist.description }}</p>
+                            <p class="parrafo">{{ psychologist.tipo_consulta }}</p>
+                            <p class="parrafo">{{ psychologist.especialidad }}</p>
+                            <p class="parrafo">{{ psychologist.precio }}</p>
                         </div>
                     </div>
                 </div>

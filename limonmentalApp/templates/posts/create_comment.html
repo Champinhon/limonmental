@@ -228,6 +228,16 @@
     a{
         text-decoration: none;
     }
+    .container-psicologos{
+            padding: 2rem 9%;
+        }
+        .psicologos{
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            padding-top: 10rem;
+        }
 </style>
 <body>
     <header class="headercss">
@@ -248,6 +258,7 @@
      </header>
 
     <!-- templates/posts/create_comment.html -->
+    <div class="container-psicologos">
     <h2>Añadir comentario</h2>
     <p>Post: {{ post.title }}</p>
     <form method="post">
@@ -264,6 +275,7 @@
         <button type="submit" class="btn btn-danger">Eliminar Comentario</button>
     </form>
 {% endif %}
+</div>
 <script>
     let menu = document.querySelector('#menu-btn');
     let navbar = document.querySelector('.navbar');

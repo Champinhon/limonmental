@@ -229,6 +229,60 @@
     a{
         text-decoration: none;
     }
+    .container-psicologos{
+            padding: 2rem 9%;
+            margin-top: 7rem;
+
+        }
+        .psicologos{
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            padding-top: 10rem;
+        }
+        .titulo{
+            font-size: 4.5rem;
+            color: var(--black);
+            line-height: 1.8;
+        }
+        .parrafo{
+            font-size: 1.7rem;
+            color: var(--light-color);
+            line-height: 1.8;
+            padding: 1rem 0;
+        }
+        .btn-enviar{
+            margin-top: 1rem;
+            padding: .5rem;
+            padding-left: 1rem;
+            border: var(--border);
+            border-radius: .5rem;
+            box-shadow: var(--box-shadow);
+            color: var(--green);
+            cursor: pointer;
+            font-size: 1.7rem;
+        }
+        .btn-danger{
+            margin-top: 1rem;
+            padding: .5rem;
+            padding-left: 1rem;
+            border: var(--border);
+            border-radius: .5rem;
+            box-shadow: var(--box-shadow);
+            color: #fff;
+            cursor: pointer;
+            font-size: 1.7rem;
+            background-color: var(--green);
+        }
+        .btn-enviar:hover{
+            color: var(--green);
+            background-color: #fff;
+        }
+        .btn-danger:hover{
+            color: #fff;
+            background-color: var(--green);
+        }
 </style> 
 <body>
     <header class="headercss">
@@ -247,12 +301,12 @@
         </nav>
         <div id="menu-btn" class="fas fa-bars"></div>
      </header>
-<div class="container mt-5">
+<div class="container-psicologos">
     <div class="card">
         <div class="card-body">
-            <h2 class="card-title">{{ post.title }}</h2>
-            <p class="card-text">{{ post.content }}</p>
-            <p class="card-text"><small class="text-muted">Creado el {{ post.created_at }}</small></p>
+            <h2 class="titulo">{{ post.title }}</h2>
+            <p class="parrafo">{{ post.content }}</p>
+            <p class="card-text"><small class="parrafo">Creado el {{ post.created_at }}</small></p>
 
             <h3 class="mt-4">Comentarios</h3>
             {% for comment in post.comments.all %}
@@ -274,13 +328,13 @@
                 <form method="post" action="{% url 'post_detail' post_id=post.id %}">
                     {% csrf_token %}
                     {{ comment_form.as_p }}
-                    <button type="submit" class="btn btn-primary">Añadir Comentario</button>
+                    <button type="submit" class="btn-enviar">Añadir Comentario</button>
                 </form>
                 {% if user.is_staff or user == post.author %}
                     <h3 class="mt-4">Eliminar Post</h3>
                     <form method="post" action="{% url 'delete_post' post_id=post.id %}">
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-danger">Eliminar Post</button>
+                        <button type="submit" class="btn-danger">Eliminar Post</button>
                     </form>
                 {% endif %}
             {% else %}

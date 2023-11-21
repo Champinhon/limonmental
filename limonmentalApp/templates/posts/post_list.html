@@ -281,6 +281,17 @@
             padding: 1rem;
             font-size: 1.7rem;
         }
+        .titulo{
+            font-size: 4.5rem;
+            color: var(--black);
+            line-height: 1.8;
+        }
+        .parrafo{
+            font-size: 1.7rem;
+            color: var(--light-color);
+            line-height: 1.8;
+            padding: 1rem 0;
+        }
 </style>
 <body>
     <header class="headercss">
@@ -313,8 +324,8 @@
     </div>
 
     <div class="container">
-        <h1>Explora Nuestros Posts</h1>
-        <p>Descubre contenido valioso creado por nuestra comunidad.</p>
+        <h1 class="titulo">Explora Nuestros Posts</h1>
+        <p class="parrafo">Descubre contenido valioso creado por nuestra comunidad.</p>
 
         {% if latest_posts %}
             <div class="row row-cols-1 row-cols-md-2 g-4">
@@ -322,10 +333,10 @@
                     <div class="col">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title"><a href="{% url 'post_detail' post.id %}" class="text-decoration-none">{{ post.title }}</a></h5>
-                                <p class="card-text">{{ post.content }}</p>
-                                <p class="card-text"><small class="text-muted">Creado a las: {{ post.created_at }}</small></p>
-                                <p class="card-text"><small class="text-muted">Cantidad de comentarios: {{ post.comments.count }}</small></p>
+                                <h5 class="card-title"><a href="{% url 'post_detail' post.id %}" class="titulo">{{ post.title }}</a></h5>
+                                <p class="parrafo">{{ post.content }}</p>
+                                <p class="card-text"><small class="parrafo">Creado a las: {{ post.created_at }}</small></p>
+                                <p class="card-text"><small class="parrafo">Cantidad de comentarios: {{ post.comments.count }}</small></p>
                             </div>
                         </div>
                     </div>
