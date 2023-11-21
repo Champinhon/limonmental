@@ -10,6 +10,313 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </head>
+<style>
+    :root{
+       --green: #16a085;
+       --black: #444;
+       --light-color: #777;
+       --box-shadow: .5rem .5rem 0rem rgba(22,160,133,.2);
+       --text-shadow: .5rem .5rem 0rem rgba(0,0,0,.2);
+        --border: .2rem solid var(--green);
+    }
+    *{
+        font-family: 'Poppins', sans-serif;
+        margin: 0; padding: 0;
+        box-sizing: border-box;
+        outline: none; border: none;
+        text-transform: capitalize;
+        transition: all .2s ease-out;
+        text-decoration: none;
+    }
+    html{
+        font-size: 62.5%;
+        overflow-x: hidden;
+        scroll-padding-top: 7rem;
+        scroll-behavior: smooth;
+    }
+    section{
+        padding: 2rem 9%;
+    }
+    .home{
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        padding-top: 10rem;
+    }
+    .home .image{
+        flex: 1 1 45rem;
+    }
+    .home .image img{
+        width: 100%;
+    }
+    .home .content{
+        flex: 1 1 45rem;
+    }   
+    .btn{
+        margin-top: 1rem;
+        padding: .5rem;
+        padding-left: 1rem;
+        border: var(--border);
+        border-radius: .5rem;
+        box-shadow: var(--box-shadow);
+        color: var(--green);
+        cursor: pointer;
+        font-size: 1.7rem;
+    }
+    .btn span{
+        padding: .7rem 1rem;
+        border-radius: .5rem;
+        background: var(--green);
+        color: #fff;
+        margin-left: .5rem;
+    }
+    .btn:hover{
+        color: var(--green);
+        background-color: #fff;
+    }
+    .home .content h3{
+        font-size: 4.5rem;
+        color: var(--black);
+        line-height: 1.8;
+    }
+    .home .content p{
+        font-size: 1.7rem;
+        color: var(--light-color);
+        line-height: 1.8;
+        padding: 1rem 0;
+    }
+    
+    .headercss{
+        padding:2rem 9%;
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        z-index: 1000;
+        box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .1);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #fff;
+    }
+    .headercss .logo{
+        font-size: 2.5rem;
+        color: var(--black);
+    }
+    .headercss .logo i{
+        color: var(--green);
+    }
+    .headercss .navbar a{
+        font-size: 1.7rem;
+        color: var(--light-color);
+        margin-left: 2rem;
+    }
+    .headercss .navbar a:hover{
+        color: var(--green)
+    }
+    #menu-btn{
+        font-size: 2.5rem;
+        border-radius: .5rem;
+        background: #eee;
+        color: var(--green);
+        padding: 1rem 1.5rem;
+        cursor: pointer;
+        display: none;
+    }
+    @media (max-width: 991px){
+         html{
+            font-size: 55%;
+         }
+         .headercss{
+            padding: 2rem;
+         }
+    }
+    @media (max-width: 450px){
+         html{
+            font-size: 50%;
+         }
+
+    }
+    @media (max-width: 768px){
+        #menu-btn{
+            display: initial;
+        }
+        .headercss .navbar{
+            position: absolute;
+            top: 115%; right: 2rem;
+            border-radius: .5rem;
+            box-shadow: var(--box-shadow);
+            border: var(--border);
+            width: 30rem;
+            background: #fff;
+            transform: scale(0);
+            opacity: 0;
+            transform-origin: top right;
+            transition: none;
+
+        }
+        .headercss .navbar a{
+            font-size: 2rem;
+            display: block;
+            margin: 2.5rem;
+        }
+        .headercss .navbar.active {
+            transform: scale(1);
+            opacity: 1;
+            transition: .2s ease-out;
+        }
+    }
+    .section:nth-child(even){
+        background: #f5f5f5;
+    }
+    .icon-container{
+        display: grid;
+        gap: 2rem;
+        grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+    }
+    .icon-container .icons{
+        border: var(--border);
+        border-radius: .5rem;
+        box-shadow: var(--box-shadow);
+        text-align: center;
+        padding: 2.5rem;
+    }
+    .icon-container .icons i{
+       font-size: 4.5rem;
+       color: var(--green);
+       padding-bottom: .7rem;
+
+    }
+    .icon-container .icons h3{
+       font-size: 2.5rem;
+       color: var(--black);
+       padding-bottom: .5rem 0;
+       
+    }
+    .icon-container .icons p{
+       font-size: 1.7rem;
+       color: var(--light-color);
+    }
+    .about .row{
+        display: flex;
+        align-items: var(--green);
+        flex-wrap: wrap;
+        gap: 2rem;
+    }
+    .about .row .content h3{
+        color: var(--black);
+        font-size: 4rem;
+        line-height: 1.8;
+    }
+    .about .row .content p{
+        color: var(--light-color);
+        font-size: 1.5rem;
+        padding: 1rem 0;
+        line-height: 1.8;
+    }
+    .heading{
+        text-align: center;
+        padding-bottom: 2rem;
+        color: var(--black);
+        text-transform: uppercase;
+        font-size: 5rem;
+        letter-spacing: .4rem;
+    }
+    .heading span{
+        color: var(--green);
+        text-transform: uppercase;
+    }
+    a{
+        text-decoration: none;
+    }
+    /* Estilo para la sección de filtros */
+    .filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem; /* Espacio entre los elementos del filtro */
+    margin-bottom: 2rem; /* Margen inferior para separar de otros elementos */
+}
+
+/* Estilo para los elementos de filtro (input, botón) */
+.filter input.form-control {
+    flex: 1; /* Distribuye el espacio disponible de manera uniforme entre los elementos */
+    border: var(--border);
+    border-radius: .5rem;
+    box-shadow: var(--box-shadow);
+    padding: 1rem;
+    font-size: 1.7rem;
+}
+
+/* Estilo para el botón de filtro */
+.filter button.btn-enviar {
+    border: var(--border);
+    border-radius: .5rem;
+    box-shadow: var(--box-shadow);
+    padding: 1rem;
+    font-size: 1.7rem;
+    background-color: var(--green);
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Efecto de transición de color de fondo */
+}
+
+/* Estilo para el botón de filtro al pasar el mouse */
+.filter button.btn-enviar:hover {
+    background-color: #fff;
+    color: var(--green);
+}
+.container-psicologos{
+            padding: 2rem 9%;
+        }
+        .psicologos{
+            align-items: center;
+            gap: 1.5rem;
+            padding-top: 10rem;
+        }
+        .form-control{
+            border: var(--border);
+            border-radius: .5rem;
+            box-shadow: var(--box-shadow);
+            padding: 1rem;
+            font-size: 1.7rem;
+        }
+        .titulo{
+            font-size: 4.5rem;
+            color: var(--black);
+            line-height: 1.8;
+        }
+        .parrafo{
+            font-size: 1.7rem;
+            color: var(--light-color);
+            line-height: 1.8;
+            padding: 1rem 0;
+        }
+        .btn-enviar{
+            border: var(--border);
+            border-radius: .5rem;
+            box-shadow: var(--box-shadow);
+            padding: 1rem;
+            font-size: 1.7rem;
+            background-color: var(--green);
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .form-label{
+            font-size: 1.7rem;
+            color: var(--light-color);
+            line-height: 1.8;
+            padding: 1rem 0;
+        }
+        .form-control{
+            border: var(--border);
+            border-radius: .5rem;
+            box-shadow: var(--box-shadow);
+            padding: 1rem;
+            font-size: 1.7rem;
+        }
+</style>
 <body class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
@@ -20,7 +327,7 @@
                         {% csrf_token %}
                     
                         <div class="mb-3">
-                            {{ form.username.label_tag }}
+                            <p class="parrafo">{{ form.username.label_tag }}</p>
                             <input type="text" name="{{ form.username.name }}" class="form-control" required>
                             <div class="invalid-feedback">
                                 Por favor, ingresa tu nombre de usuario.
@@ -28,7 +335,7 @@
                         </div>
                     
                         <div class="mb-3">
-                            {{ form.email.label_tag }}
+                            <p class="parrafo">{{ form.email.label_tag }}</p>
                             <input type="email" name="{{ form.email.name }}" class="form-control" required>
                             <div class="invalid-feedback">
                                 Por favor, ingresa una dirección de correo electrónico válida.
@@ -36,7 +343,7 @@
                         </div>
                     
                         <div class="mb-3">
-                            {{ form.password1.label_tag }}
+                            <p class="parrafo">{{ form.password1.label_tag }}</p>
                             <input type="password" name="{{ form.password1.name }}" class="form-control" required>
                             <div class="invalid-feedback">
                                 La contraseña es obligatoria.
@@ -44,14 +351,14 @@
                         </div>
                     
                         <div class="mb-3">
-                            {{ form.password2.label_tag }}
+                           <p class="parrafo"> {{ form.password2.label_tag }}</p>
                             <input type="password" name="{{ form.password2.name }}" class="form-control" required>
                             <div class="invalid-feedback">
                                 Por favor, confirma tu contraseña.
                             </div>
                         </div>
                     
-                        <button type="submit" class="btn btn-primary">Registrarse</button>
+                        <button type="submit" class="btn-enviar">Registrarse</button>
                     </form>
                 </div>
                 {% if messages %}
