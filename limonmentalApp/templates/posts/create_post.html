@@ -331,7 +331,9 @@
                     </div>
                     <div class="mb-3">
                         <label for="{{ form.content.id_for_label }}" class="form-label">Contenido</label>
-                        <input type="text" class="form-control" id="{{ form.content.id_for_label }}" name="{{ form.content.name }}" placeholder="Contenido">
+                        <div class="input-group">
+                            <textarea class="form-control input-autoresize" id="{{ form.content.id_for_label }}" name="{{ form.content.name }}" placeholder="Contenido"></textarea>
+                        </div>
                     </div>
                     <div class="mb-3">
                         <button type="submit" class="btn-enviar">Crear Post </button>
@@ -351,6 +353,14 @@
             menu.classList.remove('fa-times');
             navbar.classList.remove('active');
         }
+    </script>
+    <script>
+        const textArea = document.querySelector('.input-autoresize');
+    
+        textArea.addEventListener('input', () => {
+            textArea.style.height = 'auto';
+            textArea.style.height = textArea.scrollHeight + 'px'; 
+        });
     </script>
 </body>
 </html>

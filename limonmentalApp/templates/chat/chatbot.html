@@ -103,7 +103,7 @@
         color: var(--green);
     }
     .headercss .navbar a{
-        font-size: 1.7rem;
+        font-size: 1.5rem;
         color: var(--light-color);
         margin-left: 2rem;
     }
@@ -121,7 +121,7 @@
     }
     @media (max-width: 991px){
          html{
-            font-size: 55%;
+            font-size: 65%;
          }
          .headercss{
             padding: 2rem;
@@ -260,6 +260,7 @@
             gap: 1.5rem;
             padding-top: 10rem;
         }
+
 </style>
 <body>
     <header class="headercss">
@@ -295,10 +296,10 @@
         <form id="chat-form">
             {% csrf_token %}
             <div class="input-group mb-3">
-                <input type="text" name="message" id="user-input" class="form-control" placeholder="Escribe tu mensaje...">
-                <div class="input-group-append">
-                    <button class="btn-enviar" type="submit">Enviar</button>
-                </div>
+                <textarea name="message" id="user-input" class="form-control form-control-autoresize" placeholder="Escribe tu mensaje..."></textarea>    
+            </div>
+            <div class="input-group-append">
+                <button class="btn-enviar" type="submit">Enviar</button>
             </div>
         </form>
     </div>
@@ -311,7 +312,7 @@
             var userInput = document.getElementById('user-input').value.trim();
             var chatContainer = document.getElementById('chat-container');
             var csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-            
+    
             if (!userInput) {
                 return;
             }
@@ -373,6 +374,14 @@
                 menu.classList.remove('fa-times');
                 navbar.classList.remove('active');
             }
+        </script>
+        <script>
+            const userInputElement = document.getElementById('user-input');
+
+            userInputElement.addEventListener('input', () => {
+                userInputElement.style.height = 'auto'; // Restablecer la altura
+                userInputElement.style.height = userInputElement.scrollHeight + 'px'; // Ajustar la altura al contenido
+            });
         </script>
     <!-- Enlaces a JavaScript, Bootstrap ... -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
