@@ -106,8 +106,8 @@ def chatbot(request):
     return JsonResponse({'error': 'Método no permitido'}, status=405)
 def psychologists(request):
     psychologists_list = [
-        {"name": "Psicólogo 1", "photo": "https://storage.googleapis.com/limonmental/Disen%CC%83o%20sin%20ti%CC%81tulo%20(5).png", "description": "Descripción del psicólogo 1", "tipo_consulta": "Virtual", "especialidad": "Especialidad 1", "precio": 10000},
-        {"name": "Psicólogo 2", "photo": "https://storage.googleapis.com/limonmental/53875233-04FA-4805-B538-43655913EC1C.jpg", "description": "Descripción del psicólogo 2", "tipo_consulta": "Presencial", "especialidad": "Especialidad 2", "precio": 20000},
+        #{"name": "Psicólogo 1", "photo": "https://storage.googleapis.com/limonmental/Disen%CC%83o%20sin%20ti%CC%81tulo%20(5).png", "description": "Descripción del psicólogo 1", "tipo_consulta": "Virtual", "especialidad": "Especialidad 1", "precio": 10000},
+        
     ]
 
     query = request.GET.get('q')
