@@ -24,7 +24,7 @@ import openai
 from openai import OpenAI
 
 # Configura tu clave de API de OpenAI
-LIMONCITO_ID =  'asst_kiVue3Z0DecLT8PRXbRUs53e'
+LIMONCITO_ID =  'asst_J3X4gmg4DXux3UoBYpqRBHOd'
 
 client = OpenAI(api_key = "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")
 
@@ -76,7 +76,7 @@ def wait_on_run(run, thread):
             thread_id=thread.id,
             run_id=run.id,
         )
-        time.sleep(0.5)
+        time.sleep(0.2)
     return run
 
 def limoncito(mensaje):
