@@ -119,6 +119,18 @@
             cursor: pointer;
             display: none;
         }
+        @media (min-width: 992px) {
+            .filter-container {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .filter-item {
+                flex: 1;
+                margin-right: 10px; /* Espacio entre elementos */
+            }
+        }
         @media (max-width: 991px){
              html{
                 font-size: 55%;
@@ -126,11 +138,17 @@
              .headercss{
                 padding: 2rem;
              }
+             .filter-item {
+                width: 100%;
+                margin-bottom: 10px; /* Espacio entre elementos */
+            }
+
         }
         @media (max-width: 450px){
              html{
                 font-size: 50%;
              }
+             
     
         }
         @media (max-width: 768px){
@@ -161,7 +179,14 @@
                 opacity: 1;
                 transition: .2s ease-out;
             }
-        }
+            .filter-container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+
+
+        }   
         .section:nth-child(even){
             background: #f5f5f5;
         }
@@ -294,19 +319,20 @@
     
     <div class="container-psicologos">
         <form method="get" action="{% url 'psychologists' %}">
-            <div class="psicologos">
-                <input type="text" class="form-control" name="q" placeholder="Buscar por nombre...">
-                <select class="form-select" name="tipo_consulta" aria-label="Tipo de consulta">
+            <div class="psicologos filter-container">
+                <input type="text" class="form-control filter-item" name="q" placeholder="Buscar por nombre...">
+                <select class="form-select filter-item" name="tipo_consulta" aria-label="Tipo de consulta">
                     <option value="" selected>Tipo de Consulta</option>
                     <option value="Virtual">Virtual</option>
                     <option value="Presencial">Presencial</option>
                 </select>
-                <input type="text" class="form-control" name="especialidad" placeholder="Especialidad">
-                <input type="text" class="form-control" name="precio_min" placeholder="Precio Mínimo">
-                <input type="text" class="form-control" name="precio_max" placeholder="Precio Máximo">
+                <input type="text" class="form-control filter-item" name="especialidad" placeholder="Especialidad">
+                <input type="text" class="form-control filter-item" name="precio_min" placeholder="Precio Mínimo">
+                <input type="text" class="form-control filter-item" name="precio_max" placeholder="Precio Máximo">
                 <button class="btn-enviar" type="submit">Buscar</button>
             </div>
         </form>
+        
 
         {% if query %}
             <p>Resultados de la búsqueda para: "{{ query }}"</p>
