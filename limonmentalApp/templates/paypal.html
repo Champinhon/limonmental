@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Limón Mental 🍋 - Tu Compañero Virtual</title>
+    <link rel="icon" href="https://storage.googleapis.com/limonmental/Disen%CC%83o%20sin%20ti%CC%81tulo%20(5).png" type="image/png" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+</head>
+<style>
+    :root{
+       --green: #16a085;
+       --black: #444;
+       --light-color: #777;
+       --box-shadow: .5rem .5rem 0rem rgba(22,160,133,.2);
+       --text-shadow: .5rem .5rem 0rem rgba(0,0,0,.2);
+        --border: .2rem solid var(--green);
+    }
+    *{
+        font-family: 'Poppins', sans-serif;
+        margin: 0; padding: 0;
+        box-sizing: border-box;
+        outline: none; border: none;
+        transition: all .2s ease-out;
+        text-decoration: none;
+    }
+    html{
+        font-size: 62.5%;
+        overflow-x: hidden;
+        scroll-padding-top: 7rem;
+        scroll-behavior: smooth;
+    }
+    section{
+        padding: 2rem 9%;
+    }
+    .home{
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        padding-top: 10rem;
+    }
+    .home .image{
+        flex: 1 1 45rem;
+    }
+    .home .image img{
+        width: 100%;
+    }
+    .home .content{
+        flex: 1 1 45rem;
+    }   
+    .btn{
+        margin-top: 1rem;
+        padding: .5rem;
+        padding-left: 1rem;
+        border: var(--border);
+        border-radius: .5rem;
+        box-shadow: var(--box-shadow);
+        color: var(--green);
+        cursor: pointer;
+        font-size: 1.7rem;
+    }
+    .btn span{
+        padding: .7rem 1rem;
+        border-radius: .5rem;
+        background: var(--green);
+        color: #fff;
+        margin-left: .5rem;
+    }
+    .btn:hover{
+        color: var(--green);
+        background-color: #fff;
+    }
+    .home .content h3{
+        font-size: 4.5rem;
+        color: var(--black);
+        line-height: 1.8;
+    }
+    .home .content p{
+        font-size: 1.7rem;
+        color: var(--light-color);
+        line-height: 1.8;
+        padding: 1rem 0;
+    }
+    .headercss{
+        padding:2rem 9%;
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        z-index: 1000;
+        box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .1);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #fff;
+    }
+    .headercss .logo{
+        font-size: 2.5rem;
+        color: var(--black);
+    }
+    .headercss .logo i{
+        color: var(--green);
+    }
+    .headercss .navbar a{
+        font-size: 1.7rem;
+        color: var(--light-color);
+        margin-left: 2rem;
+    }
+    .headercss .navbar a:hover{
+        color: var(--green)
+    }
+    #menu-btn{
+        font-size: 2.5rem;
+        border-radius: .5rem;
+        background: #eee;
+        color: var(--green);
+        padding: 1rem 1.5rem;
+        cursor: pointer;
+        display: none;
+    }
+    @media (max-width: 991px){
+         html{
+            font-size: 55%;
+         }
+         .headercss{
+            padding: 2rem;
+         }
+    }
+    @media (max-width: 450px){
+         html{
+            font-size: 50%;
+         }
+
+    }
+    @media (max-width: 768px){
+        #menu-btn{
+            display: initial;
+        }
+        .headercss .navbar{
+            position: absolute;
+            top: 115%; right: 2rem;
+            border-radius: .5rem;
+            box-shadow: var(--box-shadow);
+            border: var(--border);
+            width: 30rem;
+            background: #fff;
+            transform: scale(0);
+            opacity: 0;
+            transform-origin: top right;
+            transition: none;
+
+        }
+        .headercss .navbar a{
+            font-size: 2rem;
+            display: block;
+            margin: 2.5rem;
+        }
+        .headercss .navbar.active {
+            transform: scale(1);
+            opacity: 1;
+            transition: .2s ease-out;
+        }
+    }
+    .section:nth-child(even){
+        background: #f5f5f5;
+    }
+    .icon-container{
+        display: grid;
+        gap: 2rem;
+        grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+    }
+    .icon-container .icons{
+        border: var(--border);
+        border-radius: .5rem;
+        box-shadow: var(--box-shadow);
+        text-align: center;
+        padding: 2.5rem;
+    }
+    .icon-container .icons i{
+       font-size: 4.5rem;
+       color: var(--green);
+       padding-bottom: .7rem;
+
+    }
+    .icon-container .icons h3{
+       font-size: 2.5rem;
+       color: var(--black);
+       padding-bottom: .5rem 0;
+       
+    }
+    .icon-container .icons p{
+       font-size: 1.7rem;
+       color: var(--light-color);
+    }
+    .about .row{
+        display: flex;
+        align-items: var(--green);
+        flex-wrap: wrap;
+        gap: 2rem;
+    }
+    .about .row .content h3{
+        color: var(--black);
+        font-size: 4rem;
+        line-height: 1.8;
+    }
+    .about .row .content p{
+        color: var(--light-color);
+        font-size: 1.5rem;
+        padding: 1rem 0;
+        line-height: 1.8;
+    }
+    .heading{
+        text-align: center;
+        padding-bottom: 2rem;
+        color: var(--black);
+        font-size: 5rem;
+        letter-spacing: .4rem;
+    }
+    .heading span{
+        color: var(--green);
+    }
+    a{
+        text-decoration: none;
+    }
+    .footer{
+        padding: 2rem 9%;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 0 -.5rem 1.5rem rgba(0, 0, 0, .1);
+    }
+    .footer .footer-content .footer-logo{
+        font-size: 2.5rem;
+        color: var(--black);
+    }
+    .footer .footer-content .footer-links{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .footer .footer-content .footer-links a{
+        font-size: 1.7rem;
+        color: var(--light-color);
+        margin-left: 2rem;
+    }
+    .footer .footer-content .footer-links a:hover{
+        color: var(--green);
+    }
+    .footer .footer-social a{
+        font-size: 2.5rem;
+        color: var(--light-color);
+        margin-left: 2rem;
+    }
+    .footer .footer-social a:hover{
+        color: var(--green);
+    }
+    @media (max-width: 768px){
+        .footer .footer-content{
+            flex-direction: column;
+            align-items: center;
+        }
+        .footer .footer-content .footer-links{
+            margin-top: 2rem;
+        }
+    }
+    @media (max-width: 450px){
+        .footer .footer-content .footer-links{
+            flex-wrap: wrap;
+        }
+        .footer .footer-content .footer-links a{
+            margin: 1rem;
+        }
+    }
+    .price-box {
+    display: inline-flex;
+    align-items: center;
+    border: 2px solid var(--green);
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 1.7rem;
+    margin-top: 7rem;
+}
+
+.dollar-sign {
+    font-size: 1.5rem;
+    margin-right: 0.2rem;
+    color: var(--green);
+    margin-top: 7rem;
+}
+
+.price {
+    font-size: 2rem; 
+    color: var(--black);
+
+}
+.botones-paypal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 300px;
+    margin-top: 7rem;
+    margin-bottom: 7rem;
+}
+</style>
+<body>
+ <header class="headercss">
+    <a href="../../" class="logo"><i class="fas fa-heartbeat"></i> Limón mental 🍋</a>
+    <nav class="navbar">
+        <a href="{% url 'psychologists' %}">Psicólogos</a>
+        <a href="{% url 'posts' %}">Posts</a>
+        {% if user.is_authenticated %}
+        <a href="{% url 'create_post' %}">Crear post</a>
+        <a href="{% url 'chatbot' %}">Limoncito</a>
+        <a href="{% url 'logout' %}">Cerrar sesión</a>
+        {% else %}
+            <a href="{% url 'login' %}">Iniciar sesión</a>
+            <a href="{% url 'register' %}">Registrarse</a>
+        {% endif %}
+    </nav>
+    <div id="menu-btn" class="fas fa-bars"></div>
+ </header>
+    <section class="home">
+        <div class="image">
+            <img src="https://storage.googleapis.com/limonmental/Disen%CC%83o%20sin%20ti%CC%81tulo%20(5).png" alt="">
+        </div>
+        <div class="content">
+            <h3>¡Hola! Soy Limoncito, tu compañero virtual</h3>
+            <p>¡Si estás en esta página es porque eres psicólogo y deseas ser parte de nuestra comunidad!</p>
+        </div>
+    </section>
+
+ <div class="botones-paypal" id="paypal-button-container-P-8MJ527498S796092HMVPVJCQ"></div>
+ <script src="https://www.paypal.com/sdk/js?client-id=AVSZKoKtrHfZxsLtJnHZKuFIQYAUD8MT_6VK3zT2NgwC6gcD3Gq-FjRkYERek_Par6KrCQB2isyhoGX3&vault=true&intent=subscription" data-sdk-integration-source="button-factory"></script>
+ <script>
+   paypal.Buttons({
+       style: {
+           shape: 'rect',
+           color: 'white',
+           layout: 'vertical',
+           label: 'subscribe'
+       },
+       createSubscription: function(data, actions) {
+         return actions.subscription.create({
+           /* Creates the subscription */
+           plan_id: 'P-8MJ527498S796092HMVPVJCQ'
+         });
+       },
+       onApprove: function(data, actions) {
+         alert(data.subscriptionID); // You can add optional success message for the subscriber here
+       }
+   }).render('#paypal-button-container-P-8MJ527498S796092HMVPVJCQ'); // Renders the PayPal button
+ </script>
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-logo">
+            <i class="fas fa-heartbeat"></i> Limón mental 🍋
+        </div>
+    </div>
+    <div class="footer-social">
+        <a href="https://www.instagram.com/limon.mental/"><i class="fab fa-instagram"></i></a>
+    </div>
+    <div class="copyright">
+        &copy; <span id="current-year"></span> Limón Mental
+    </div>
+</footer>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+

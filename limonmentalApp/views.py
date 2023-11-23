@@ -89,6 +89,7 @@ def limoncito(mensaje):
     for message in messages.data:
         if message.role == "assistant":
             return message.content[0].text.value
+@login_required
 def chatbot(request):
     if request.method == 'POST':
         try:
@@ -107,11 +108,11 @@ def chatbot(request):
 def psychologists(request):
     psychologists_list = [
         #{"name": "Psicólogo 1", "photo": "https://storage.googleapis.com/limonmental/Disen%CC%83o%20sin%20ti%CC%81tulo%20(5).png", "description": "Descripción del psicólogo 1", "tipo_consulta": "Virtual", "especialidad": "Especialidad 1", "precio": 10000},
-        
+
     ]
 
     query = request.GET.get('q')
-    tipo_consulta = request.GET.get('tipo_consulta')
+    tipo_consulta = request.GET.get('tipo_consulta')    
     especialidad = request.GET.get('especialidad')
     precio_min = request.GET.get('precio_min')
     precio_max = request.GET.get('precio_max')
@@ -264,3 +265,7 @@ def post_detail(request, post_id):
     }
 
     return render(request, 'posts/post_detail.html', context)
+
+@login_required
+def paypal(request):
+    return render(request, 'paypal.html')
