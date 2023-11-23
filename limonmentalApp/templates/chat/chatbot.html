@@ -7,246 +7,276 @@
     <!-- Enlaces a Bootstrap para mejorar el diseño -->
     <link rel="icon" href="https://storage.googleapis.com/limonmental/Disen%CC%83o%20sin%20ti%CC%81tulo%20(5).png" type="image/png" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-</head>
 <style>
-    :root{
-       --green: #16a085;
-       --black: #444;
-       --light-color: #777;
-       --box-shadow: .5rem .5rem 0rem rgba(22,160,133,.2);
-       --text-shadow: .5rem .5rem 0rem rgba(0,0,0,.2);
-        --border: .2rem solid var(--green);
-    }
-    *{
-        font-family: 'Poppins', sans-serif;
-        margin: 0; padding: 0;
-        box-sizing: border-box;
-        outline: none; border: none;
-        transition: all .2s ease-out;
-        text-decoration: none;
-    }
-    html{
-        font-size: 100.5%;
-        overflow-x: hidden;
-        scroll-padding-top: 7rem;
-        scroll-behavior: smooth;
-    }
-    section{
-        padding: 2rem 9%;
-    }
-    .home{
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 1.5rem;
-        padding-top: 10rem;
-    }
-    .home .image{
-        flex: 1 1 45rem;
-    }
-    .home .image img{
-        width: 100%;
-    }
-    .home .content{
-        flex: 1 1 45rem;
-    }   
-    .btn{
-        margin-top: 1rem;
-        padding: .5rem;
-        padding-left: 1rem;
-        border: var(--border);
-        border-radius: .5rem;
-        box-shadow: var(--box-shadow);
-        color: var(--green);
-        cursor: pointer;
-        font-size: 1.7rem;
-    }
-    .btn span{
-        padding: .7rem 1rem;
-        border-radius: .5rem;
-        background: var(--green);
-        color: #fff;
-        margin-left: .5rem;
-    }
-    .btn:hover{
-        color: var(--green);
-        background-color: #fff;
-    }
-    .home .content h3{
-        font-size: 4.5rem;
-        color: var(--black);
-        line-height: 1.8;
-    }
-    .home .content p{
-        font-size: 1.7rem;
-        color: var(--light-color);
-        line-height: 1.8;
-        padding: 1rem 0;
-    }
-    .headercss{
-        padding:2rem 9%;
-        position: fixed;
-        top: 0; left: 0; right: 0;
-        z-index: 1000;
-        box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .1);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background: #fff;
-    }
-    .headercss .logo{
-        font-size: 2.5rem;
-        color: var(--black);
-    }
-    .headercss .logo i{
-        color: var(--green);
-    }
-    .headercss .navbar a{
-        font-size: 1.5rem;
-        color: var(--light-color);
-        margin-left: 2rem;
-    }
-    .headercss .navbar a:hover{
-        color: var(--green)
-    }
-    #menu-btn{
-        font-size: 2.5rem;
-        border-radius: .5rem;
-        background: #eee;
-        color: var(--green);
-        padding: 1rem 1.5rem;
-        cursor: pointer;
-        display: none;
-    }
-    @media (max-width: 991px){
-         html{
-            font-size: 65%;
-         }
-         .headercss{
-            padding: 2rem;
-         }
-    }
-    @media (max-width: 450px){
-         html{
-            font-size: 50%;
-         }
-
-    }
-    @media (max-width: 768px){
-        #menu-btn{
-            display: initial;
+        :root{
+           --green: #16a085;
+           --black: #444;
+           --light-color: #777;
+           --box-shadow: .5rem .5rem 0rem rgba(22,160,133,.2);
+           --text-shadow: .5rem .5rem 0rem rgba(0,0,0,.2);
+            --border: .2rem solid var(--green);
         }
-        .headercss .navbar{
-            position: absolute;
-            top: 115%; right: 2rem;
+        *{
+            font-family: 'Poppins', sans-serif;
+            margin: 0; padding: 0;
+            box-sizing: border-box;
+            outline: none; border: none;
+            transition: all .2s ease-out;
+            text-decoration: none;
+        }
+        html{
+            font-size: 62.5%;
+            overflow-x: hidden;
+            scroll-padding-top: 7rem;
+            scroll-behavior: smooth;
+        }
+        section{
+            padding: 2rem 9%;
+        }
+        .home{
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            padding-top: 10rem;
+        }
+        .home .image{
+            flex: 1 1 45rem;
+        }
+        .home .image img{
+            width: 100%;
+        }
+        .home .content{
+            flex: 1 1 45rem;
+        }   
+        .btn{
+            margin-top: 1rem;
+            padding: .5rem;
+            padding-left: 1rem;
+            border: var(--border);
             border-radius: .5rem;
             box-shadow: var(--box-shadow);
-            border: var(--border);
-            width: 30rem;
+            color: var(--green);
+            cursor: pointer;
+            font-size: 1.7rem;
+        }
+        .btn span{
+            padding: .7rem 1rem;
+            border-radius: .5rem;
+            background: var(--green);
+            color: #fff;
+            margin-left: .5rem;
+        }
+        .btn:hover{
+            color: var(--green);
+            background-color: #fff;
+        }
+        .home .content h3{
+            font-size: 4.5rem;
+            color: var(--black);
+            line-height: 1.8;
+        }
+        .home .content p{
+            font-size: 1.7rem;
+            color: var(--light-color);
+            line-height: 1.8;
+            padding: 1rem 0;
+        }
+        .headercss{
+            padding:2rem 9%;
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             background: #fff;
-            transform: scale(0);
-            opacity: 0;
-            transform-origin: top right;
-            transition: none;
-
+        }
+        .headercss .logo{
+            font-size: 2.5rem;
+            color: var(--black);
+        }
+        .headercss .logo i{
+            color: var(--green);
         }
         .headercss .navbar a{
-            font-size: 2rem;
-            display: block;
-            margin: 2.5rem;
+            font-size: 1.7rem;
+            color: var(--light-color);
+            margin-left: 2rem;
         }
-        .headercss .navbar.active {
-            transform: scale(1);
-            opacity: 1;
-            transition: .2s ease-out;
+        .headercss .navbar a:hover{
+            color: var(--green)
         }
-    }
-    .section:nth-child(even){
-        background: #f5f5f5;
-    }
-    .icon-container{
-        display: grid;
-        gap: 2rem;
-        grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-        padding-top: 5rem;
-        padding-bottom: 5rem;
-    }
-    .icon-container .icons{
-        border: var(--border);
-        border-radius: .5rem;
-        box-shadow: var(--box-shadow);
-        text-align: center;
-        padding: 2.5rem;
-    }
-    .icon-container .icons i{
-       font-size: 4.5rem;
-       color: var(--green);
-       padding-bottom: .7rem;
+        #menu-btn{
+            font-size: 2.5rem;
+            border-radius: .5rem;
+            background: #eee;
+            color: var(--green);
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            display: none;
+        }
+        @media (min-width: 992px) {
+            .filter-container {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
 
-    }
-    .icon-container .icons h3{
-       font-size: 2.5rem;
-       color: var(--black);
-       padding-bottom: .5rem 0;
-       
-    }
-    .icon-container .icons p{
-       font-size: 1.7rem;
-       color: var(--light-color);
-    }
-    .about .row{
-        display: flex;
-        align-items: var(--green);
-        flex-wrap: wrap;
-        gap: 2rem;
-    }
-    .about .row .content h3{
-        color: var(--black);
-        font-size: 4rem;
-        line-height: 1.8;
-    }
-    .about .row .content p{
-        color: var(--light-color);
-        font-size: 1.5rem;
-        padding: 1rem 0;
-        line-height: 1.8;
-    }
-    .heading{
-        text-align: center;
-        padding-bottom: 2rem;
-        color: var(--black);
-        font-size: 5rem;
-        letter-spacing: .4rem;
-    }
-    .heading span{
-        color: var(--green);
-    }
-    a{
-        text-decoration: none;
-    }
-    .alert{
-        padding: 1rem;
-        border-radius: .5rem;
-        background: #fff;
-        box-shadow: var(--box-shadow);
-        border: var(--border);
-        margin-bottom: 1rem;
-    }
-    .form-control{
-        border-radius: .5rem;
-        border: var(--border);
-        box-shadow: var(--box-shadow);
-    }
-    .btn-enviar{
-        border-radius: .5rem;
-        background: var(--green);
-        color: #fff;
-        padding: .5rem 1rem;
-        border: var(--border);
-        box-shadow: var(--box-shadow);
-        cursor: pointer;
-    }
-    .container-psicologos{
+            .filter-item {
+                flex: 1;
+                margin-right: 10px; /* Espacio entre elementos */
+            }
+        }
+        @media (max-width: 991px){
+             html{
+                font-size: 55%;
+             }
+             .headercss{
+                padding: 2rem;
+             }
+             .filter-item {
+                width: 100%;
+                margin-bottom: 10px; /* Espacio entre elementos */
+            }
+
+        }
+        @media (max-width: 450px){
+             html{
+                font-size: 50%;
+             }
+             
+    
+        }
+        @media (max-width: 768px){
+            #menu-btn{
+                display: initial;
+            }
+            .headercss .navbar{
+                position: absolute;
+                top: 115%; right: 2rem;
+                border-radius: .5rem;
+                box-shadow: var(--box-shadow);
+                border: var(--border);
+                width: 30rem;
+                background: #fff;
+                transform: scale(0);
+                opacity: 0;
+                transform-origin: top right;
+                transition: none;
+    
+            }
+            .headercss .navbar a{
+                font-size: 2rem;
+                display: block;
+                margin: 2.5rem;
+            }
+            .headercss .navbar.active {
+                transform: scale(1);
+                opacity: 1;
+                transition: .2s ease-out;
+            }
+            .filter-container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+
+
+        }   
+        .section:nth-child(even){
+            background: #f5f5f5;
+        }
+        .icon-container{
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+            padding-top: 5rem;
+            padding-bottom: 5rem;
+        }
+        .icon-container .icons{
+            border: var(--border);
+            border-radius: .5rem;
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            padding: 2.5rem;
+        }
+        .icon-container .icons i{
+           font-size: 4.5rem;
+           color: var(--green);
+           padding-bottom: .7rem;
+    
+        }
+        .icon-container .icons h3{
+           font-size: 2.5rem;
+           color: var(--black);
+           padding-bottom: .5rem 0;
+           
+        }
+        .icon-container .icons p{
+           font-size: 1.7rem;
+           color: var(--light-color);
+        }
+        .about .row{
+            display: flex;
+            align-items: var(--green);
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        .about .row .content h3{
+            color: var(--black);
+            font-size: 4rem;
+            line-height: 1.8;
+        }
+        .about .row .content p{
+            color: var(--light-color);
+            font-size: 1.5rem;
+            padding: 1rem 0;
+            line-height: 1.8;
+        }
+        .heading{
+            text-align: center;
+            padding-bottom: 2rem;
+            color: var(--black);
+            font-size: 5rem;
+            letter-spacing: .4rem;
+        }
+        .heading span{
+            color: var(--green);
+        }
+        a{
+            text-decoration: none;
+        }
+        .form-control{
+            border: var(--border);
+            border-radius: .5rem;
+            box-shadow: var(--box-shadow);
+            padding: 1rem;
+            font-size: 1.7rem;
+            margin-bottom: 1rem;
+        }
+        .form-select{
+            border: var(--border);
+            border-radius: .5rem;
+            box-shadow: var(--box-shadow);
+            padding: 1rem;
+            font-size: 1.7rem;
+            margin-bottom: 1rem;
+        }
+        .btn-enviar{
+            border: var(--border);
+            border-radius: .5rem;
+            box-shadow: var(--box-shadow);
+            padding: 1rem;
+            font-size: 1.7rem;
+            margin-bottom: 1rem;
+        }
+        .btn-enviar:hover{
+            background: #fff;
+            color: var(--green);
+        }
+        .container-psicologos{
             padding: 2rem 9%;
             margin-top: 7rem;
         }
@@ -258,7 +288,20 @@
             padding-top: 10rem;
         }
 
-</style>
+        .parrafo{
+            font-size: 1.7rem;
+            color: var(--light-color);
+            line-height: 1.8;
+            padding: 1rem 0;
+        }
+        .titulo{
+            color: var(--green);    
+            font-size: 3.5rem;
+        }
+        #chat-container {
+            font-size: 2rem; /* Cambia el tamaño de fuente según tus preferencias */
+        }
+    </style>
 <body>
     <header class="headercss">
         <a href="../../" class="logo"><i class="fas fa-heartbeat"></i>Limón mental 🍋</a>
@@ -300,7 +343,7 @@
             </div>
         </form>
     </div>
-
+    
     <!-- Código JavaScript -->
     <script>
         document.getElementById('chat-form').addEventListener('submit', function(event) {

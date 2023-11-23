@@ -228,6 +228,56 @@
     a{
         text-decoration: none;
     }
+    .footer{
+        padding: 2rem 9%;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 0 -.5rem 1.5rem rgba(0, 0, 0, .1);
+    }
+    .footer .footer-content .footer-logo{
+        font-size: 2.5rem;
+        color: var(--black);
+    }
+    .footer .footer-content .footer-links{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .footer .footer-content .footer-links a{
+        font-size: 1.7rem;
+        color: var(--light-color);
+        margin-left: 2rem;
+    }
+    .footer .footer-content .footer-links a:hover{
+        color: var(--green);
+    }
+    .footer .footer-social a{
+        font-size: 2.5rem;
+        color: var(--light-color);
+        margin-left: 2rem;
+    }
+    .footer .footer-social a:hover{
+        color: var(--green);
+    }
+    @media (max-width: 768px){
+        .footer .footer-content{
+            flex-direction: column;
+            align-items: center;
+        }
+        .footer .footer-content .footer-links{
+            margin-top: 2rem;
+        }
+    }
+    @media (max-width: 450px){
+        .footer .footer-content .footer-links{
+            flex-wrap: wrap;
+        }
+        .footer .footer-content .footer-links a{
+            margin: 1rem;
+        }
+    }
 </style>
 <body>
  <header class="headercss">
@@ -282,6 +332,24 @@
         </div>
     </div>
 </section>
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-logo">
+            <i class="fas fa-heartbeat"></i> Limón mental 🍋
+        </div>
+    </div>
+    <div class="footer-social">
+        <a href="https://www.instagram.com/limon.mental/"><i class="fab fa-instagram"></i></a>
+    </div>
+    <div class="copyright">
+        &copy; <span id="current-year"></span> Limón Mental
+    </div>
+</footer>
+<script>
+    const currentYearElement = document.getElementById('current-year');
+    const currentYear = new Date().getFullYear();
+    currentYearElement.textContent = currentYear;
+</script>
     <script>
         let menu = document.querySelector('#menu-btn');
         let navbar = document.querySelector('.navbar');
