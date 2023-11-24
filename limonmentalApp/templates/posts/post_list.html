@@ -294,6 +294,18 @@
             line-height: 1.8;
             padding: 1rem 0;
         }
+        .btn-enviar{
+            border: var(--border);
+            border-radius: .5rem;
+            box-shadow: var(--box-shadow);
+            padding: 1rem;
+            font-size: 1.7rem;
+            margin-bottom: 1rem;
+        }
+        .btn-enviar:hover{
+            background: #fff;
+            color: var(--green);
+        }
 </style>
 <body>
     <header class="headercss">
@@ -319,7 +331,7 @@
                     <input type="text" name="q" class="form-control" placeholder="Buscar..." style="width: 100%;">
                 </div>
                 <div class="col-12 col-lg-2">
-                    <button type="submit" class="btn btn-outline-primary">Buscar</button>
+                    <button type="submit" class="btn-enviar">Buscar</button>
                 </div>
             </form>
         </div>
