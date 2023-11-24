@@ -78,12 +78,11 @@ DATABASES = {
             'ENGINE': 'django.db.backends.mysql',
             'NAME': 'limonmental',
             'USER': 'admin',
-            'PASSWORD': 'VfLz3Jd0',
-            'HOST': 'mysql-154867-0.cloudclusters.net',
-            'PORT': '12816',
+            'PASSWORD': 'rtV19MXI',
+            'HOST': 'mysql-155495-0.cloudclusters.net',
+            'PORT': '16784',
         }
     }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

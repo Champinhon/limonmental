@@ -34,5 +34,5 @@ urlpatterns = [
     path('chatbot/', views.chatbot, name='chatbot'),
     #path('verify-email/<uidb64>/<token>/', views.verify_email, name='verify_email'),
     path('paypal/', views.paypal, name='paypal'),
-    
+    path('404/', views.error_404, name='error_404'),    
 ]

@@ -193,10 +193,9 @@ def register(request):
             login(request, user)
             return redirect('home') 
         else:
-            # Aquí, si el formulario no es válido, se agregarán mensajes de error
             for field, errors in form.errors.items():
                 for error in errors:
-                    messages.error(request, f"{field.capitalize()}: {error}")
+                    messages.error(request, f"{error}")
     else:
         form = CustomUserCreationForm()
 
@@ -269,3 +268,7 @@ def post_detail(request, post_id):
 @login_required
 def paypal(request):
     return render(request, 'paypal.html')
+
+
+def error_404(request, exception):
+    return render(request, '404.html', status=404)
