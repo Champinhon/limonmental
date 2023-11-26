@@ -336,7 +336,19 @@
         
 
         {% if query %}
-            <p>Resultados de la búsqueda para: "{{ query }}"</p>
+            <p class="parrafo">Resultados de la búsqueda para: "{{ query }}"</p>
+        {% endif %}
+        {% if tipo_consulta %}
+            <p class="parrafo">Tipo de consulta: "{{ tipo_consulta }}"</p>
+        {% endif %}
+        {% if especialidad %}
+            <p class="parrafo">Especialidad: "{{ especialidad }}"</p>
+        {% endif %}
+        {% if precio_min %}
+            <p class="parrafo">Precio mínimo: "{{ precio_min }}"</p>
+        {% endif %}
+        {% if precio_max %}
+            <p class="parrafo">Precio máximo: "{{ precio_max }}"</p>
         {% endif %}
         <div class="row mt-5">
             {% for psychologist in psychologists_list %}
