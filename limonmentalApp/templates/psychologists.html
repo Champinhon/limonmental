@@ -293,7 +293,6 @@
             font-size: 1.7rem;
             color: var(--light-color);
             line-height: 1.8;
-            padding: 1rem 0;
         }
         .titulo{
             color: var(--green);    
@@ -320,7 +319,7 @@
     
     <div class="container-psicologos">
         <form method="get" action="{% url 'psychologists' %}">
-            <div class="psicologos filter-container">
+            <div class="psicologos">
                 <input type="text" class="form-control filter-item" name="q" placeholder="Buscar por nombre...">
                 <select class="form-select filter-item" name="tipo_consulta" aria-label="Tipo de consulta">
                     <option value="" selected>Tipo de Consulta</option>
@@ -347,9 +346,11 @@
                         <div class="card-body">
                             <h5 class="titulo">{{ psychologist.name }}</h5>
                             <p class="parrafo">{{ psychologist.description }}</p>
-                            <p class="parrafo">{{ psychologist.tipo_consulta }}</p>
-                            <p class="parrafo">{{ psychologist.especialidad }}</p>
-                            <p class="parrafo">{{ psychologist.precio }}</p>
+                            <p class="parrafo">Tipo de consulta: {{ psychologist.tipo_consulta }}</p>
+                            <p class="parrafo">Tipo de especialidad: {{ psychologist.especialidad }}</p>
+                            <p class="parrafo">Precio por consulta: {{ psychologist.precio }}</p>
+                            <p class="parrafo">Correo electrónico: {{ psychologist.correo }}</p>
+                            <p class="parrafo">Número: {{ psychologist.numero }}</p>
                         </div>
                     </div>
                 </div>
