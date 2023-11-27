@@ -335,10 +335,12 @@
                                 Por favor, ingresa tu contraseña.
                             </div>
                         </div>
-                    
+                        
                         <button type="submit" class="btn-enviar">Iniciar sesión</button>
                     </form>
-                    
+                    <div>
+                        <p class="parrafo">¿No tienes una cuenta? <a href="{% url 'register' %}">Regístrate</a></p>
+                    </div>
                 </div>
                 {% if messages %}
                 <ul class="messages">

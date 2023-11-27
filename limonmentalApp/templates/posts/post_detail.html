@@ -306,8 +306,10 @@
             <h2 class="titulo">{{ post.title }}</h2>
             <p class="parrafo">{{ post.content }}</p>
             <p class="card-text"><small class="parrafo">Creado el {{ post.created_at }}</small></p>
-
             <h3 class="mt-4">Comentarios</h3>
+            {% if user.is_staff %}
+            <p class="parrafo"> {{post.author.username}} </p>
+            {% endif %}
             {% for comment in post.comments.all %}
                 <div class="mb-3">
                     <p>{{ comment.text }} - {{ comment.author.username }} - {{ comment.created_at }}</p>

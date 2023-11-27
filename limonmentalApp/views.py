@@ -154,7 +154,10 @@ def delete_post(request, post_id):
 def post_list(request):
     posts = Post.objects.order_by('-created_at') 
     context = {'latest_posts': posts}
-    return render(request, 'posts/post_list.html', context)
+    if is_admin(request.user):
+        return render(request, 'posts/post_list.html', context)
+    else:
+        return render(request, 'posts/post_list.html', context)
 @login_required
 def create_post(request):
     if request.method == 'POST':
@@ -272,3 +275,6 @@ def paypal(request):
 
 def error_404(request, exception):
     return render(request, '404.html', status=404)
+
+def blog(request):
+    return render(request, 'blog.html')
