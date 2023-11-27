@@ -4,23 +4,14 @@ from django.http import HttpResponse, JsonResponse
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
-'''from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.http import require_http_methods
-from django.core.mail import send_mail
-from django.contrib.sites.shortcuts import get_current_site
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.utils.encoding import force_bytes, force_text
-from django.contrib.auth.tokens import default_token_generator
-from django.contrib.auth.models import User'''
 
 # Importaciones de tus aplicaciones y modelos
-from .forms import CustomUserCreationForm, CustomAuthenticationForm, PostForm, CommentForm
+from .forms import CustomUserCreationForm, PostForm, CommentForm
 from .models import Post, Comment
 
 # Importaciones de terceros y estándar de Python
 import json
 import time
-import openai
 from openai import OpenAI
 
 # Configura tu clave de API de OpenAI
@@ -278,4 +269,4 @@ def error_404(request, exception):
 
 def blog(request):
     return render(request, 'blog.html')
-    
+        
