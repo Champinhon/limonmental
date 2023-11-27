@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from limonmentalApp import views
+from django.contrib.auth import views as auth_views
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", views.home, name="home"),
@@ -34,6 +35,10 @@ urlpatterns = [
     path('chatbot/', views.chatbot, name='chatbot'),
     #path('verify-email/<uidb64>/<token>/', views.verify_email, name='verify_email'),
     path('paypal/', views.paypal, name='paypal'),
-    path('404/', views.error_404, name='error_404'), 
+    path('404/', views.error_404, name='error_404'),
+    path('password_reset/', auth_views.PasswordResetView.as_view(template_name='password_reset.html'), name='password_reset'),
+    path('password_reset_done/', auth_views.PasswordResetDoneView.as_view(template_name='password_reset_done.html'), name='password_reset_done'),
+    path('password_reset_confirm/<uidb64>/<token>/',auth_views.PasswordResetConfirmView.as_view(template_name='password_reset_confirm.html'), name='password_reset_confirm'),
+    path('password_reset_complete/', auth_views.PasswordResetCompleteView.as_view(template_name='password_reset_complete.html'), name='password_reset_complete'),
     #path('blog/', views.blog, name='blog')   
 ]

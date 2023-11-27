@@ -278,3 +278,4 @@ def error_404(request, exception):
 
 def blog(request):
     return render(request, 'blog.html')
+    
