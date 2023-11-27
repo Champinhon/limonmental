@@ -30,6 +30,8 @@
         overflow-x: hidden;
         scroll-padding-top: 7rem;
         scroll-behavior: smooth;
+        background-image: url('https://storage.googleapis.com/limonmental/Disen%CC%83o%20sin%20ti%CC%81tulo%20(9).png');
+
     }
     section{
         padding: 2rem 9%;
@@ -263,6 +265,8 @@
 }
 .container-psicologos{
             padding: 2rem 9%;
+            background-image: url('https://storage.googleapis.com/limonmental/Disen%CC%83o%20sin%20ti%CC%81tulo%20(9).png');
+
         }
         .psicologos{
             align-items: center;
@@ -307,9 +311,9 @@
             color: var(--green);
         }
 </style>
-<body>
+<body class="container-psicologos">
     <header class="headercss">
-        <a href="../../" class="logo"><i class="fas fa-heartbeat"></i>Limón mental 🍋</a>
+        <a href="{% url 'home' %}" class="logo"><i class="fas fa-heartbeat"></i>Limón mental 🍋</a>
         <nav class="navbar">
             <a href="{% url 'psychologists' %}">Psicólogos</a>
             <a href="{% url 'posts' %}">Posts</a>
@@ -324,7 +328,7 @@
         </nav>
         <div id="menu-btn" class="fas fa-bars"></div>
      </header>
-     <div class="container-psicologos">
+     <div class="container">
         <div class="psicologos">
             <form method="get" action="{% url 'post_search' %}" class="row g-2">
                 <div class="col-12 col-lg-6">

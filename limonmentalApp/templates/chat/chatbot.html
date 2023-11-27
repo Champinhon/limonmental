@@ -29,6 +29,8 @@
             overflow-x: hidden;
             scroll-padding-top: 7rem;
             scroll-behavior: smooth;
+            background-image: url('https://storage.googleapis.com/limonmental/Disen%CC%83o%20sin%20ti%CC%81tulo%20(9).png');
+
         }
         section{
             padding: 2rem 9%;
@@ -39,6 +41,8 @@
             flex-wrap: wrap;
             gap: 1.5rem;
             padding-top: 10rem;
+            background-image: url('https://storage.googleapis.com/limonmental/Disen%CC%83o%20sin%20ti%CC%81tulo%20(9).png');
+
         }
         .home .image{
             flex: 1 1 45rem;
@@ -279,6 +283,8 @@
         .container-psicologos{
             padding: 2rem 9%;
             margin-top: 7rem;
+            background-image: url('https://storage.googleapis.com/limonmental/Disen%CC%83o%20sin%20ti%CC%81tulo%20(9).png');
+
         }
         .psicologos{
             display: flex;
@@ -302,9 +308,9 @@
             font-size: 2rem; /* Cambia el tamaño de fuente según tus preferencias */
         }
     </style>
-<body>
+<body class="container-psicologos">
     <header class="headercss">
-        <a href="../../" class="logo"><i class="fas fa-heartbeat"></i>Limón mental 🍋</a>
+        <a href="{% url 'home' %}" class="logo"><i class="fas fa-heartbeat"></i>Limón mental 🍋</a>
         <nav class="navbar">
             <a href="{% url 'psychologists' %}">Psicólogos</a>
             <a href="{% url 'posts' %}">Posts</a>

@@ -43,7 +43,8 @@
         align-items: center;
         flex-wrap: wrap;
         gap: 1.5rem;
-        padding-top: 10rem;
+        padding-top: 19rem;
+        background-image: url('https://storage.googleapis.com/limonmental/Disen%CC%83o%20sin%20ti%CC%81tulo%20(9).png');
     }
     .home .image{
         flex: 1 1 45rem;
@@ -181,6 +182,7 @@
         box-shadow: var(--box-shadow);
         text-align: center;
         padding: 2.5rem;
+        background-color: white;
     }
     .icon-container .icons i{
        font-size: 4.5rem;
@@ -278,10 +280,14 @@
             margin: 1rem;
         }
     }
+
+    .content{
+        font-family: Inconsolata;
+    }
 </style>
 <body>
  <header class="headercss">
-    <a href="../../" class="logo"><i class="fas fa-heartbeat"></i> Limón mental 🍋</a>
+    <a href="{% url 'home' %}" class="logo"><i class="fas fa-heartbeat"></i> Limón mental 🍋</a>
     <nav class="navbar">
         <a href="{% url 'psychologists' %}">Psicólogos</a>
         <a href="{% url 'posts' %}">Posts</a>
@@ -298,7 +304,7 @@
  </header>
  <section class="home" id="home">
     <div class="image">
-        <img src="https://storage.googleapis.com/limonmental/6164-removebg-preview.png" alt="">
+        <img src="https://storage.googleapis.com/limonmental/Disen%CC%83o_sin_ti%CC%81tulo__8_-removebg-preview.png" alt="">
     </div>
     <div class="content">
         <h3>¡Tu salud mental importa!</h3>

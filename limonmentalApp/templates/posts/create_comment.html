@@ -31,6 +31,7 @@
         overflow-x: hidden;
         scroll-padding-top: 7rem;
         scroll-behavior: smooth;
+
     }
     section{
         padding: 2rem 9%;
@@ -238,7 +239,7 @@
 </style>
 <body>
     <header class="headercss">
-        <a href="../../" class="logo"><i class="fas fa-heartbeat"></i>Limón mental 🍋</a>
+        <a href="{% url 'home' %}" class="logo"><i class="fas fa-heartbeat"></i>Limón mental 🍋</a>
         <nav class="navbar">
             <a href="{% url 'psychologists' %}">Psicólogos</a>
             <a href="{% url 'posts' %}">Posts</a>

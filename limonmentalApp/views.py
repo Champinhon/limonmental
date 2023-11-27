@@ -108,7 +108,7 @@ def chatbot(request):
 def psychologists(request):
     psychologists_list = [
         {"name": "Limoncito", "photo": "https://storage.googleapis.com/limonmental/Disen%CC%83o%20sin%20ti%CC%81tulo%20(5).png", "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "tipo_consulta": "Virtual", "especialidad": "Depresión en adultos", "precio": 30000, "correo":'limoncito@gmail.com', 'numero':'+56912345678'},
-        
+
     ]
 
     query = request.GET.get('q')
