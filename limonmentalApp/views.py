@@ -279,7 +279,6 @@ def create_psychologist(request):
     else:
         form = PsychologistForm()
     return render(request, 'create_psicologo.html', {'form': form})
-@login_required
 def psychologist_detail(request, pk):
     psychologist = get_object_or_404(Psychologist, pk=pk)
     # Tu lógica para mostrar los detalles del psicólogo
