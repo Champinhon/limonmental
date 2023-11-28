@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-*vdfyvbj4%($^dvbml4(4uoc45qtvqb)6ah25s1m!xv_na5d*r"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', 'https://limonmental.onrender.com', 'limonmental.onrender.com']
 
@@ -125,7 +125,7 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-GS_CREDENTIALS_FILE = os.path.join(BASE_DIR, 'credenciales.json')
+GS_CREDENTIALS_FILE = 'https://storage.googleapis.com/limonmental/psicologiaa-91e8a35121d0.json'
 
 DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
 GS_BUCKET_NAME = 'limonmental' 
