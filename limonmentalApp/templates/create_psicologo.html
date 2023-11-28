@@ -34,7 +34,7 @@
             margin-bottom: 0.5rem;
         }
 
-        input[type="text"], input[type="number"], input[type="email"], select {
+        input[type="text"], input[type="number"], input[type="email"], select, input[type="file"] {
             width: 100%;
             padding: 1rem;
             margin-bottom: 1rem;
@@ -62,7 +62,35 @@
     <h1>Crear Psicólogo</h1>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
+        
+        <label for="{{ form.name.id_for_label }}">Nombre:</label>
+        <input type="text" name="{{ form.name.name }}" id="{{ form.name.id_for_label }}" value="{{ form.name.value }}" required>
+        
+        <label for="{{ form.description.id_for_label }}">Descripción:</label>
+        <input type="text" name="{{ form.description.name }}" id="{{ form.description.id_for_label }}" value="{{ form.description.value }}" required>
+        
+        <label for="{{ form.tipo_consulta.id_for_label }}">Tipo de Consulta:</label>
+        <select name="{{ form.tipo_consulta.name }}">
+            <option value="Virtual" {% if form.tipo_consulta.value == 'Virtual' %}selected{% endif %}>Virtual</option>
+            <option value="Presencial" {% if form.tipo_consulta.value == 'Presencial' %}selected{% endif %}>Presencial</option>
+            <option value="Ambos" {% if form.tipo_consulta.value == 'Ambos' %}selected{% endif %}>Ambos</option>
+        </select>
+
+        <label for="{{ form.especialidad.id_for_label }}">Especialidad:</label>
+        <input type="text" name="{{ form.especialidad.name }}" id="{{ form.especialidad.id_for_label }}" value="{{ form.especialidad.value }}" required>
+
+        <label for="{{ form.precio.id_for_label }}">Precio por Consulta:</label>
+        <input type="number" name="{{ form.precio.name }}" id="{{ form.precio.id_for_label }}" value="{{ form.precio.value }}" required>
+
+        <label for="{{ form.correo.id_for_label }}">Correo Electrónico:</label>
+        <input type="email" name="{{ form.correo.name }}" id="{{ form.correo.id_for_label }}" value="{{ form.correo.value }}" required>
+
+        <label for="{{ form.numero.id_for_label }}">Número de Contacto:</label>
+        <input type="text" name="{{ form.numero.name }}" id="{{ form.numero.id_for_label }}" value="{{ form.numero.value }}" required>
+
+        <label for="{{ form.photo.id_for_label }}">Foto:</label>
+        <input type="file" name="{{ form.photo.name }}" id="{{ form.photo.id_for_label }}" required>
+
         <button type="submit">Guardar Psicólogo</button>
     </form>
 </body>
