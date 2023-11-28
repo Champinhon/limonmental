@@ -6,3 +6,4 @@ requests
 pymysql
 google-cloud-storage
 django-storages
+Pillow
