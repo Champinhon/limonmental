@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 
 # Importaciones de tus aplicaciones y modelos
 from .forms import CustomUserCreationForm, PostForm, CommentForm
-from .models import Post, Comment, Psychologist
+from .models import Post, Comment
 
 # Importaciones de terceros y estándar de Python
 import json
