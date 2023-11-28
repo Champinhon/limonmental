@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 
 # Importaciones de tus aplicaciones y modelos
 from .forms import CustomUserCreationForm, PostForm, CommentForm
-from .models import Post, Comment
+from .models import Post, Comment, Psychologist
 
 # Importaciones de terceros y estándar de Python
 import json
@@ -269,4 +269,3 @@ def error_404(request, exception):
 
 def blog(request):
     return render(request, 'blog.html')
-        

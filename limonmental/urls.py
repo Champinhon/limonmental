@@ -35,6 +35,8 @@ urlpatterns = [
     path('chatbot/', views.chatbot, name='chatbot'),
     path('paypal/', views.paypal, name='paypal'),
     path('404/', views.error_404, name='error_404'),
+    
+    #path('psychologist/<int:psychologist_id>/', views.psychologist_detail, name='psychologist_detail'),
     #path('verify-email/<uidb64>/<token>/', views.verify_email, name='verify_email'),
     #path('password_reset/', auth_views.PasswordResetView.as_view(template_name='password_reset.html'), name='password_reset'),
     #path('password_reset_done/', auth_views.PasswordResetDoneView.as_view(template_name='password_reset_done.html'), name='password_reset_done'),
