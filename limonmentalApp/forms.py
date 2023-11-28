@@ -3,7 +3,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
-from .models import Post, Comment
+from .models import Post, Comment, Psychologist
 
 class PostForm(forms.ModelForm):
     class Meta:
@@ -29,3 +29,9 @@ class CustomAuthenticationForm(AuthenticationForm):
     class Meta:
         model = User  # Asegúrate de importar User desde django.contrib.auth.models
         fields = ['username', 'password']
+
+
+class PsychologistForm(forms.ModelForm):
+    class Meta:
+        model = Psychologist
+        fields = ['name', 'description', 'tipo_consulta', 'especialidad', 'precio', 'correo', 'numero', 'photo']

@@ -353,24 +353,33 @@
         {% if precio_max %}
             <p class="parrafo">Precio máximo: "{{ precio_max }}"</p>
         {% endif %}
-        <div class="row mt-5">
+        <ul>
             {% for psychologist in psychologists_list %}
-                <div class="col-md-4 mb-4">
+                <li>
                     <div class="card">
-                        <img src="{{ psychologist.photo }}" class="card-img-top img-thumbnail rounded" alt="{{ psychologist.name }}" style="width: 100%; height: 400px; object-fit: cover;">
-                        <div class="card-body">
-                            <h5 class="titulo">{{ psychologist.name }}</h5>
-                            <p class="parrafo">{{ psychologist.description }}</p>
-                            <p class="parrafo">Tipo de consulta: {{ psychologist.tipo_consulta }}</p>
-                            <p class="parrafo">Tipo de especialidad: {{ psychologist.especialidad }}</p>
-                            <p class="parrafo">Precio por consulta: {{ psychologist.precio }}</p>
-                            <p class="parrafo">Correo electrónico: {{ psychologist.correo }}</p>
-                            <p class="parrafo">Número: {{ psychologist.numero }}</p>
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="https://storage.googleapis.com/limonmental/{{ psychologist.photo }}" class="card-img-top img-thumbnail rounded" alt="{{ psychologist.name }}" style="width: 100%; height: auto; object-fit: cover;">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="titulo">{{ psychologist.name }}</h5>
+                                    <p class="parrafo">Tipo de consulta: {{ psychologist.tipo_consulta }}</p>
+                                    <p class="parrafo">Tipo de especialidad: {{ psychologist.especialidad }}</p>
+                                    <p class="parrafo">Precio por consulta: {{ psychologist.precio }}</p>
+                                    <p class="parrafo">Correo electrónico: {{ psychologist.correo }}</p>
+                                    <p class="parrafo">Número: {{ psychologist.numero }}</p>
+                                    <a href="{% url 'psychologist_detail' pk=psychologist.pk %}" class="btn-enviar">Ver Detalles</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            {% endfor %}    
-        </div>
+                    
+                </li>
+            {% endfor %}
+        </ul>
+        
+        
     </div>
     <script>
         let menu = document.querySelector('#menu-btn');

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles del Psicólogo</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background-color: #16a085;
+            color: #fff;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        h1 {
+            font-size: 3rem;
+        }
+
+        main {
+            padding: 2rem;
+        }
+
+        .psychologist-details {
+            background-color: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .psychologist-image {
+            flex: 1;
+        }
+
+        .psychologist-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+        }
+
+        .psychologist-info {
+            flex: 2;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            color: #444;
+            margin-top: 0;
+        }
+
+        p {
+            font-size: 1.7rem;
+            color: #777;
+            line-height: 1.8;
+        }
+
+        strong {
+            color: #16a085;
+        }
+
+        footer {
+            background-color: #16a085;
+            color: #fff;
+            text-align: center;
+            padding: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Detalles del Psicólogo</h1>
+    </header>
+    <main>
+        <section class="psychologist-details">
+            <div class="psychologist-image">
+                <img src="https://storage.googleapis.com/limonmental/{{ psychologist.photo }}" alt="{{ psychologist.name }}">
+            </div>
+            <div class="psychologist-info">
+                <h2>{{ psychologist.name }}</h2>
+                <p><strong>Descripción:</strong> {{ psychologist.description }}</p>
+                <p><strong>Tipo de Consulta:</strong> {{ psychologist.tipo_consulta }}</p>
+                <p><strong>Especialidad:</strong> {{ psychologist.especialidad }}</p>
+                <p><strong>Precio por Consulta:</strong> ${{ psychologist.precio }}</p>
+                <p><strong>Correo Electrónico:</strong> {{ psychologist.correo }}</p>
+                <p><strong>Número de Contacto:</strong> {{ psychologist.numero }}</p>
+            </div>
+        </section>
+        <form method="post" action="{% url 'delete_psychologist' pk=psychologist.pk %}">
+            {% csrf_token %}
+            <button type="submit" onclick="return confirm('¿Estás seguro de que quieres borrar a este psicólogo?')" class="btn btn-danger">Borrar Psicólogo</button>
+        </form>
+    </main>
+    <footer>
+    </footer>
+</body>
+</html>

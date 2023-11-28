@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Psicólogo</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            font-size: 3rem;
+            text-align: center;
+            margin-top: 2rem;
+            color: #16a085;
+        }
+
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-size: 1.7rem;
+            color: #444;
+            margin-bottom: 0.5rem;
+        }
+
+        input[type="text"], input[type="number"], input[type="email"], select {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            font-size: 1.7rem;
+            border: 0.2rem solid #16a085;
+            border-radius: 0.5rem;
+        }
+
+        button[type="submit"] {
+            background-color: #16a085;
+            color: #fff;
+            padding: 1rem 2rem;
+            font-size: 1.7rem;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #138965;
+        }
+    </style>
+</head>
+<body>
+    <h1>Crear Psicólogo</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar Psicólogo</button>
+    </form>
+</body>
+</html>

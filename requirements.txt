@@ -4,3 +4,5 @@ django
 Django
 requests
 pymysql
+google-cloud-storage
+django-storages

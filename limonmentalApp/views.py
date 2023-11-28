@@ -3,11 +3,11 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 # Importaciones de tus aplicaciones y modelos
-from .forms import CustomUserCreationForm, PostForm, CommentForm
-from .models import Post, Comment
+from .forms import CustomUserCreationForm, PostForm, CommentForm, PsychologistForm
+from .models import Post, Comment, Psychologist
 
 # Importaciones de terceros y estándar de Python
 import json
@@ -97,11 +97,7 @@ def chatbot(request):
 
     return JsonResponse({'error': 'Método no permitido'}, status=405)
 def psychologists(request):
-    psychologists_list = [
-        {"name": "Limoncito", "photo": "https://storage.googleapis.com/limonmental/Disen%CC%83o%20sin%20ti%CC%81tulo%20(5).png", "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "tipo_consulta": "Virtual", "especialidad": "Depresión en adultos", "precio": 30000, "correo":'limoncito@gmail.com', 'numero':'+56912345678'},
-
-    ]
-
+    psychologists_list = Psychologist.objects.all()
     query = request.GET.get('q')
     tipo_consulta = request.GET.get('tipo_consulta')    
     especialidad = request.GET.get('especialidad')
@@ -109,19 +105,22 @@ def psychologists(request):
     precio_max = request.GET.get('precio_max')
 
     if query:
-        psychologists_list = [psychologist for psychologist in psychologists_list if query.lower() in psychologist['name'].lower()]
+        psychologists_list = [psychologist for psychologist in psychologists_list if query.lower() in psychologist.name.lower()]
 
     if tipo_consulta:
-        psychologists_list = [psychologist for psychologist in psychologists_list if tipo_consulta.lower() == psychologist['tipo_consulta'].lower()]
+        psychologists_list = [psychologist for psychologist in psychologists_list if tipo_consulta.lower() == psychologist.tipo_consulta.lower()]
 
     if especialidad:
-        psychologists_list = [psychologist for psychologist in psychologists_list if especialidad.lower() in psychologist['especialidad'].lower()]
+        psychologists_list = [psychologist for psychologist in psychologists_list if especialidad.lower() in psychologist.especialidad.lower()]
 
     if precio_min:
-        psychologists_list = [psychologist for psychologist in psychologists_list if psychologist['precio'] >= int(precio_min)]
+        psychologists_list = [psychologist for psychologist in psychologists_list if psychologist.precio >= int(precio_min)]
 
     if precio_max:
-        psychologists_list = [psychologist for psychologist in psychologists_list if psychologist['precio'] <= int(precio_max)]
+        psychologists_list = [psychologist for psychologist in psychologists_list if psychologist.precio <= int(precio_max)]
+
+    for psychologist in psychologists_list:
+        psychologist.photo_url = psychologist.get_photo_url()
 
     return render(request, 'psychologists.html', {'psychologists_list': psychologists_list, 'query': query, 'tipo_consulta': tipo_consulta, 'especialidad': especialidad, 'precio_min': precio_min, 'precio_max': precio_max})
 
@@ -269,3 +268,31 @@ def error_404(request, exception):
 
 def blog(request):
     return render(request, 'blog.html')
+@login_required
+@user_passes_test(is_admin)
+def create_psychologist(request):
+    if request.method == 'POST':
+        form = PsychologistForm(request.POST, request.FILES)
+        if form.is_valid():
+            psychologist = form.save()
+            return redirect('psychologist_detail', pk=psychologist.pk)
+    else:
+        form = PsychologistForm()
+    return render(request, 'create_psicologo.html', {'form': form})
+@login_required
+def psychologist_detail(request, pk):
+    psychologist = get_object_or_404(Psychologist, pk=pk)
+    # Tu lógica para mostrar los detalles del psicólogo
+    return render(request, 'psychologist_detail.html', {'psychologist': psychologist})
+
+
+
+def delete_psychologist(request, pk):
+    psychologist = get_object_or_404(Psychologist, pk=pk)
+
+    if request.method == 'POST':
+        psychologist.delete()
+        messages.success(request, 'Psicólogo eliminado correctamente.')
+        return redirect('home')
+    else:
+        return render(request, 'delete_psychologist_confirmation.html', {'psychologist': psychologist})

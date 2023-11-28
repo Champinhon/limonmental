@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "psicologiaa",
+  "private_key_id": "91e8a35121d022741b4f3435d9d2069cef923efd",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC5JRG8RkVJxgb1\nSADVLfEOtDL/V1F2+J48Rx8tUr8bfWHlYZiQ76m4IK86k7nUdHze8QThNMo6jl7b\npj8unMyxXB3m6Jlg7Sw02CkL86BcZ4WHTlcPiAvUyD7OWMsNyUhiyzskEoJczO5/\nS2sPlCRT7xfiaDIws3U5IMAKHDeXo2o5wV7sPrtB1rh3jDITKQnVxnZA4aNaO9yy\n3OU2HzPu9o5CDAkuBXNTJ3F/cArk3ldJgcmPM3oPim88Y+NI679rpmmZVqLQ6gIA\nrdvojGDcHUfeuDcH/jiEipwyJQmwpJJ2lqimqeXvykMt6KQjX2rFM7qKiwsqvg1c\nZPZC+jLLAgMBAAECggEAO3HNeffN81vjjAlsSwYPKbttzFIK0/oLRCtJtVGmDnt5\nXR6yz4ZDpdzIpjQcLDyigyo7eNtsOtTPXBLKonqxthhveV4hMN+1m9nzg+TbDhAm\n7USX62Kw+ca5c6NKvshrt1ytRm2y8XzS7ogWfdAAwfo4Xvc5di2Ia6k6P4TDzKmd\nYuFwCk4UyQjJuOHyY3LI9H3T5D5j3hegOzyrpeY4qAUVoof1S6aa9FXc+g7a3c2j\n/ktU/DHqxZSwIrHFsUL9YidH30EouzK80L0UjKA2ta0Ctut544bjRwnGgVLEXd2L\n0yJtnRiu3ZYtOEki2x6imNZzJ/wSGcmSYP3y5VngMQKBgQDhvWn7Zf4Kddn72qv4\nK7xgKCc/IiO2f9S3RdrxAg/Lw+zArWeMV4vqFDeVE3gnyjMIWqPpiIWCF0AfIBJh\nO4gAYc/C6mP65m/Oob+fmyNUFCd1oTA8jOogX1xgmjFYlxfHfQXbvO111OmL/VW3\nhL7eIVbwW9RsRzkxGOldR2hunwKBgQDR9pOmDVHbHxZTO9GDlutCQB37W+8l6A86\nzas5DoqYMnZ5qcrQKANxtIAo7GVreog/e5zkb50ecgHIJjkGaElpLiJZOioodYS8\ng5OIkDewE5BmR2In/olRR0Hf3y5vB6qzdisO2/wXdY0yhkSVs5uWywZTN3VDWjdD\nQVyl9deIVQKBgEd2WjW+3QRcuKxVVnmTBuh97aa73QhqQWHfmGcRmwSLushoXM59\n7Iom6k2kQzZ9eVhcsWU91d4QFDmGQqtLWEueq1HuN8Z26tBEPlB9oVp9otxHMekJ\nRxkGd00RoyuDcYCyoIcmsRnLVD//7AHT4USa01X2DDJW/dEALOhdsb7LAoGAQe3+\nkP7PvFG3re0zrfFe8E+32m0U3D9RQPLCGEmDpaT65Ns3L0PRSQwXzkHk2uoADIch\nTe3qVVwRSSsPbv6iRp/Q81m7UTcNtjBOzGwUwHp0Nlml7c8UiWwpuEWZjA3JQU8S\n2DiloSwtaTcWJDfg3GnmE41vifWzMrA8inR2+H0CgYAPGrIqKD5lRpofnVJFX8Ae\nPrWKyiyQwJCkwzI0tIlTWfJro+rFRkSJZ/F3F9Sn1dDvEj8kYF2VUgQd4ySl/cFs\n+YFEhfuhmoXKEV5ZUoIz1b01n7RCJ7wXgQRRmTEPt8xZSSwbtqBcnsLV5T7AGQay\nOxLWMryecV0aLEmO1aslFQ==\n-----END PRIVATE KEY-----\n",
+  "client_email": "limonmental@psicologiaa.iam.gserviceaccount.com",
+  "client_id": "112976610321534652125",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/limonmental%40psicologiaa.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
