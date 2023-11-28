@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalles del Psicólogo</title>
+    <link rel="icon" href="https://storage.googleapis.com/limonmental/Disen%CC%83o%20sin%20ti%CC%81tulo%20(5).png" type="image/png" />
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -94,10 +95,14 @@
                 <p><strong>Número de Contacto:</strong> {{ psychologist.numero }}</p>
             </div>
         </section>
+        {% if user.is_authenticated %}
+        {% if user.is_staff %}
         <form method="post" action="{% url 'delete_psychologist' pk=psychologist.pk %}">
             {% csrf_token %}
             <button type="submit" onclick="return confirm('¿Estás seguro de que quieres borrar a este psicólogo?')" class="btn btn-danger">Borrar Psicólogo</button>
         </form>
+        {% endif %}
+        {% endif %}
     </main>
     <footer>
     </footer>
