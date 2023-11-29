@@ -355,7 +355,7 @@
         {% if precio_max %}
             <p class="parrafo">Precio máximo: "{{ precio_max }}"</p>
         {% endif %}
-        <ul>
+        <ul style="list-style-type: none;">
             {% for psychologist in psychologists_list %}
                 <li>
                     <div class="card">
@@ -376,7 +376,6 @@
                             </div>
                         </div>
                     </div>
-                    
                 </li>
             {% endfor %}
         </ul>
