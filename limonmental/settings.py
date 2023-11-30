@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-*vdfyvbj4%($^dvbml4(4uoc45qtvqb)6ah25s1m!xv_na5d*r"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', 'https://limonmental.onrender.com', 'limonmental.onrender.com', 'https://limonmental.com', 'www.limonmental.com', 'https://www.limonmental.com', 'limonmental.com']
 
