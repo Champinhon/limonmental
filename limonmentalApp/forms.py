@@ -32,6 +32,9 @@ class CustomAuthenticationForm(AuthenticationForm):
 
 
 class PsychologistForm(forms.ModelForm):
+    precio = forms.CharField(max_length=20)  # Cambiar el campo precio a CharField
+    correo = forms.CharField(max_length=100, label='Instagram')  # Cambiar el campo correo a CharField y cambiar el label a 'Instagram'
+
     class Meta:
         model = Psychologist
         fields = ['name', 'description', 'tipo_consulta', 'especialidad', 'precio', 'correo', 'numero', 'photo']
