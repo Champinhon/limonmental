@@ -30,7 +30,7 @@ class Psychologist(models.Model):
     tipo_consulta = models.CharField(max_length=50)
     especialidad = models.CharField(max_length=50)
     precio = models.CharField(max_length=20)
-    correo = models.EmailField()
+    correo = models.CharField(max_length=100)
     numero = models.CharField(max_length=15)
     photo = models.ImageField(upload_to='psychologists_photos/', blank=True, null=True, storage=GoogleCloudStorage())
 
