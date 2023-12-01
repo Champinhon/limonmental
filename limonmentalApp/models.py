@@ -29,7 +29,7 @@ class Psychologist(models.Model):
     description = models.TextField()
     tipo_consulta = models.CharField(max_length=50)
     especialidad = models.CharField(max_length=50)
-    precio = models.DecimalField(max_digits=8, decimal_places=2)
+    precio = models.CharField(max_length=20)
     correo = models.EmailField()
     numero = models.CharField(max_length=15)
     photo = models.ImageField(upload_to='psychologists_photos/', blank=True, null=True, storage=GoogleCloudStorage())
