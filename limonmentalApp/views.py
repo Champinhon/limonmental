@@ -101,8 +101,6 @@ def psychologists(request):
     query = request.GET.get('q')
     tipo_consulta = request.GET.get('tipo_consulta')    
     especialidad = request.GET.get('especialidad')
-    precio_min = request.GET.get('precio_min')
-    precio_max = request.GET.get('precio_max')
 
     if query:
         psychologists_list = [psychologist for psychologist in psychologists_list if query.lower() in psychologist.name.lower()]
@@ -113,16 +111,10 @@ def psychologists(request):
     if especialidad:
         psychologists_list = [psychologist for psychologist in psychologists_list if especialidad.lower() in psychologist.especialidad.lower()]
 
-    if precio_min:
-        psychologists_list = [psychologist for psychologist in psychologists_list if psychologist.precio >= int(precio_min)]
-
-    if precio_max:
-        psychologists_list = [psychologist for psychologist in psychologists_list if psychologist.precio <= int(precio_max)]
-
     for psychologist in psychologists_list:
         psychologist.photo_url = psychologist.get_photo_url()
 
-    return render(request, 'psychologists.html', {'psychologists_list': psychologists_list, 'query': query, 'tipo_consulta': tipo_consulta, 'especialidad': especialidad, 'precio_min': precio_min, 'precio_max': precio_max})
+    return render(request, 'psychologists.html', {'psychologists_list': psychologists_list, 'query': query, 'tipo_consulta': tipo_consulta, 'especialidad': especialidad })
 
 def is_admin(user):
     return user.is_staff

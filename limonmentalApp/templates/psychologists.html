@@ -333,8 +333,6 @@
                     <option value="Ambos">Ambos</option>
                 </select>
                 <input type="text" class="form-control filter-item" name="especialidad" placeholder="Especialidad">
-                <input type="text" class="form-control filter-item" name="precio_min" placeholder="Precio Mínimo">
-                <input type="text" class="form-control filter-item" name="precio_max" placeholder="Precio Máximo">
                 <button class="btn-enviar" type="submit">Buscar</button>
             </div>
         </form>
@@ -348,12 +346,6 @@
         {% endif %}
         {% if especialidad %}
             <p class="parrafo">Especialidad: "{{ especialidad }}"</p>
-        {% endif %}
-        {% if precio_min %}
-            <p class="parrafo">Precio mínimo: "{{ precio_min }}"</p>
-        {% endif %}
-        {% if precio_max %}
-            <p class="parrafo">Precio máximo: "{{ precio_max }}"</p>
         {% endif %}
         <ul style="list-style-type: none;">
             {% for psychologist in psychologists_list %}
