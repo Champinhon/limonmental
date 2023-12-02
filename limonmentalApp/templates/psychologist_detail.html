@@ -40,16 +40,18 @@
 
         .psychologist-image {
             flex: 1;
+            text-align: center; /* Centra la imagen */
         }
 
         .psychologist-image img {
-            width: 100%;
+            max-width: 100%; /* Asegura que la imagen se ajuste al ancho del contenedor */
             height: auto;
             border-radius: 0.5rem;
         }
 
         .psychologist-info {
             flex: 2;
+            text-align: center; /* Centra la información */
         }
 
         h2 {
@@ -73,6 +75,25 @@
             color: #fff;
             text-align: center;
             padding: 1rem 0;
+        }
+
+        @media screen and (max-width: 768px) {
+            .psychologist-details {
+                flex-direction: column; /* Cambia la dirección de los elementos a vertical */
+            }
+            .psychologist-info {
+                text-align: center; /* Centra la información en dispositivos móviles */
+            }
+
+            h2 {
+                font-size: 1.5rem; /* Tamaño de fuente reducido para encabezados en dispositivos móviles */
+                text-align: center; /* Centra el encabezado en dispositivos móviles */
+            }
+
+            p {
+                font-size: 1rem; /* Tamaño de fuente reducido para párrafos en dispositivos móviles */
+                text-align: center; /* Centra los párrafos en dispositivos móviles */
+            }
         }
     </style>
 </head>
