@@ -15,9 +15,9 @@ import time
 from openai import OpenAI
 
 # Configura tu clave de API de OpenAI
-LIMONCITO_ID =  'asst_J3X4gmg4DXux3UoBYpqRBHOd'
+LIMONCITO_ID =  ''
 
-client = OpenAI(api_key = "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")
+client = OpenAI(api_key = "")
 
 def submit_message(assistant_id, thread, user_message):
     client.beta.threads.messages.create(
