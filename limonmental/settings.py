@@ -123,8 +123,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 GS_CREDENTIALS_FILE = os.path.join(BASE_DIR, 'credenciales.json')
 
 DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
-GS_BUCKET_NAME = 'limonmental' 
-GS_PROJECT_ID = 'psicologiaa' 
+GS_BUCKET_NAME = '' 
+GS_PROJECT_ID = '' 
 GS_CREDENTIALS = service_account.Credentials.from_service_account_file(GS_CREDENTIALS_FILE)
 
 MEDIA_URL = f'https://storage.googleapis.com/{GS_BUCKET_NAME}/'
